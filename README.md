@@ -30,13 +30,13 @@ Tags are directly related to stable commits. Oauth branch has its own tag which 
 
 In order to start, follow this steps:
 
-1. Download the commit you want to work with (the one reference in the post you are reading). `git clone https://github.com/argaen/djangozone.git;cd djangozone;git checkout <commit number>`. Use `git checkout 5fde381` to download the scratch version to check the basics are working fine.
+1. Download the commit you want to work with (the one reference in the post you are reading). `git clone https://github.com/argaen/djangozone.git;cd djangozone;git checkout <commit number>`. Use `git checkout 5fa3548` to download the scratch version to check the basics are working fine.
 
 2. Install the needed dependencies: `sudo pip install Django`. If you don't have _pip_ installed, install it with your distribution package manager. _Ubuntu_: `sudo apt-get install python-pip`.
 
 3. Go to `wsgi/openshift` folder and execute `python manage.py syncdb`. This will create the sqlite3 db file in the current folder.
 
-4. You can start now the development server with `python manage.py runserver`. Check it is working in your browser, accessing [localhost](http://127.0.0.1/:8000) at port 8000. You should see a _Welcome home_ message if you downloaded the commit 5fde381.
+4. You can start now the development server with `python manage.py runserver`. Check it is working in your browser, accessing [localhost](http://127.0.0.1/:8000) at port 8000. You should see a _Welcome home_ message if you downloaded the commit 5fa3548.
 
 
 ###Contributions
