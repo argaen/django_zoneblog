@@ -126,6 +126,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
 
     'common',
+    'posts',
 )
 
 LOGGING = {

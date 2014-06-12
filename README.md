@@ -36,7 +36,7 @@ In order to start, follow this steps:
 
 3. Go to `wsgi/openshift` folder and execute `python manage.py syncdb`. This will create the sqlite3 db file in the current folder.
 
-4. You can start now the development server with `python manage.py runserver`. Check it is working in your browser, accessing [localhost](http://127.0.0.1/:8000) at port 8000. You should see a _Welcome home_ message if you downloaded the commit 5fde381.
+4. You can start now the development server with `python manage.py runserver`. Check it is working in your browser, accessing [localhost](http://127.0.0.1:8000) at port 8000. You should see a _Welcome home_ message if you downloaded the commit 5fde381.
 
 
 ###Contributions
