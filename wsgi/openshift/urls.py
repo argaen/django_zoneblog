@@ -5,8 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', 'common.views.home', name='home'),
-
+    url(r'^$', 'posts.views.list', name='posts_list'),
 
     url(r'^admin/', include(admin.site.urls)),
 )

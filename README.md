@@ -38,7 +38,6 @@ In order to start, follow this steps:
 
 4. You can start now the development server with `python manage.py runserver`. Check it is working in your browser, accessing [localhost](http://127.0.0.1/:8000) at port 8000. You should see a _Welcome home_ message if you downloaded the commit 5fa3548.
 
-
 ###Contributions
 
 Comments, issues and others are always welcome =).

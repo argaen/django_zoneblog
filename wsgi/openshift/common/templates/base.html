@@ -9,7 +9,13 @@
     <meta name="description" content="">
     <meta name="author" content="blck">
 
-    <link rel="icon" type="image/png" href={% static "img/djangozone.png" %}>
+    <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <link rel="icon" type="image/png" href={% static "img/logos/djangozone.png" %}>
+    <link rel="stylesheet" type="text/css" href={% static "css/styles.css" %}>
+
 
     <title>Django Zone{% block title %}{% endblock title %}</title>
 
@@ -20,8 +26,41 @@
   </head>
 
   <body>
+    <div id="header-img" style="background-image: url({% static "img/header.jpg" %});"></div>
+    <div class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">DjangoZone</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav pull-right">
+            <li class="active"><a href="#">Home</a></li>
+            <li class="disabled"><a href="#news">News</a></li>
+            <li class="disabled"><a href="#packages">Packages</a></li>
+            <li><a href="#about">About</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
     {% block content %}
     {% endblock content %}
+
+    <div id="footer">
+      <div class="container">
+        <p style="margin-top:15px;" class="text-muted">Powered by 
+        <a href="http://djangoproject.com" target="blank"><img width=32 height=32 src={% static "img/logos/django.png" alt="Django" %}></img></a>
+        <a href="http://github.com" target="blank"><img width=32 height=32 src={% static "img/logos/github.png" alt="Github" %}></img></a>
+        <a href="http://getbootstrap.com" target="blank"><img width=32 height=32 src={% static "img/logos/bootstrap.png" alt="Bootstrap" %}></img></a>
+        <a href="http://openshift.com" target="blank"><img width=32 height=32 src={% static "img/logos/openshift.png" alt="Openshift" %}></img></a>
+      </div>
+    </div>
 
     {% block scripts %}
     {% endblock scripts %}
