@@ -6,7 +6,10 @@
     <p>
       <h3>{{ post.title }}</h3>
       <p><i>{{ post.published_on }}</i> by {{ post.author }}</p>
-      <p>Tags: {{ post.tags }}</p>
+      <p>{% if post.tags %}Tags: {{ post.tags }}{% endif %}</p>
+      <p>{% if post.commit %}Commit: {{ post.commit }}{% endif %}</p>
+      <p>{% if post.branch %}Branch: {{ post.branch }}{% endif %}</p>
+      <p>{% if post.tag %}Tag: {{ post.tag }}{% endif %}</p>
     </p>
     <div class="post-content">
       <p>{{ post.content|safe }}</p>
