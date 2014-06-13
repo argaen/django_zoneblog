@@ -8,8 +8,8 @@
       <p><i>{{ post.published_on }}</i> by {{ post.author }}</p>
       <p>{% if post.tags %}Tags: {{ post.tags }}{% endif %}</p>
       <p>{% if post.commit %}Commit: {{ post.commit }}{% endif %}</p>
-      <p>{% if post.branch %}Branch: {{ post.branch }}{% endif %}</p>
-      <p>{% if post.tag %}Tag: {{ post.tag }}{% endif %}</p>
+      <p>{% if post.branch %}<a href={{ post.branch }} target=blank>branch</a>{% endif %}</p>
+      <p>{% if post.tag %}<a href={{ post.tag }} target=blank>tag</a>{% endif %}</p>
     </p>
     <div class="post-content">
       <p>{{ post.content|safe }}</p>

@@ -40,7 +40,7 @@ In order to start, follow this steps:
 
 4. You can start now the development server with `python manage.py runserver`. Check it is working in your browser, accessing [localhost](http://127.0.0.1/:8000) at port 8000. You should see a _Welcome home_ message if you downloaded the commit 5fa3548.
 
-5. If the previous step worked, now execute `git checkout b72889d`, remove the sqlite3 file, and repeat the previous steps. Now you should see an exact copy of the blog without any posts. User and password for the admin is 123-123.
+5. If the previous step worked, now execute `git checkout b72889d`, remove the sqlite3 file, and repeat the previous steps. Now you should see an exact copy of the blog without any posts. User and password for the admin is admin-123.
 
 ###Contributions
 
