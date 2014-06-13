@@ -6,7 +6,7 @@
     <h3>{{ post.title }}</h3>
     <p><i>{{ post.published_on }}</i> by {{ post.author }}</p>
     <p>Tags: {{ post.tags }}</p>
-    <p>{{ post.content }}</p>
+    <p>{{ post.content|safe }}</p>
     <hr>
   {% endfor %}
 </div>
