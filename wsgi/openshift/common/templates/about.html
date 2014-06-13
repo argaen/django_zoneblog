@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block menu %}
+  <li><a href="/">Home</a></li>
+  <li class="disabled"><a href="#news">News</a></li>
+  <li class="disabled"><a href="#packages">Packages</a></li>
+  <li class="active"><a href="/about">About</a></li>
+{% endblock menu %}
+
+{% block content %}
+<div class="container" style="max-width:500px;">
+  <div class="row">
+    <div class="col-md-6">
+      <a target=blank href="http://github.com/argaen/djangozone"><img width=150px height=150px src={% static "img/logos/github_big.png" %}></img></a>
+    </div>
+    <div class="col-md-6">
+      <a target=blank href="http://twitter.com/djangozone"><img width=150px height=150px src={% static "img/logos/twitter_big.png" %}></img></a>
+    </div>
+  </div>
+</div>
+{% endblock %}

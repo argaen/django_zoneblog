@@ -40,10 +40,12 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav pull-right">
-            <li class="active"><a href="#">Home</a></li>
-            <li class="disabled"><a href="#news">News</a></li>
-            <li class="disabled"><a href="#packages">Packages</a></li>
-            <li><a href="#about">About</a></li>
+            {% block menu %}
+              <li class="active"><a href="/">Home</a></li>
+              <li class="disabled"><a href="#news">News</a></li>
+              <li class="disabled"><a href="#packages">Packages</a></li>
+              <li><a href="/about">About</a></li>
+            {% endblock menu %}
           </ul>
         </div><!--/.nav-collapse -->
       </div>
