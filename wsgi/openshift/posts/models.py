@@ -7,11 +7,12 @@ class Post(models.Model):
     published_on = models.DateField(auto_now_add=True)
     published = models.BooleanField(default=False)
     author = models.ForeignKey(User)
-    tags = models.CharField(max_length = 500)
+    tags = models.CharField(max_length=500)
     content = models.TextField()
 
-    commit = models.URLField(max_length = 300)
-    branch = models.URLField(max_length = 30)
+    commit = models.URLField(max_length=300, blank=True, null=True)
+    branch = models.URLField(max_length=150, blank=True, null=True)
+    tag = models.URLField(max_length=150, blank=True, null=True)
 
     def __unicode__(self):
         return self.title

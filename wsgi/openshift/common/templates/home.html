@@ -3,10 +3,14 @@
 {% block content %}
 <div class="container">
   {% for post in posts %}
-    <h3>{{ post.title }}</h3>
-    <p><i>{{ post.published_on }}</i> by {{ post.author }}</p>
-    <p>Tags: {{ post.tags }}</p>
-    <p>{{ post.content|safe }}</p>
+    <p>
+      <h3>{{ post.title }}</h3>
+      <p><i>{{ post.published_on }}</i> by {{ post.author }}</p>
+      <p>Tags: {{ post.tags }}</p>
+    </p>
+    <div class="post-content">
+      <p>{{ post.content|safe }}</p>
+    </div>
     <hr>
   {% endfor %}
 </div>

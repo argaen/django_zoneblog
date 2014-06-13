@@ -41,6 +41,3 @@ In order to start, follow this steps:
 ###Contributions
 
 Comments, issues and others are always welcome =).
-
-
-
