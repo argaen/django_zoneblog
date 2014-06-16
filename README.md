@@ -9,7 +9,7 @@ Open source blog from scratch written in Django.
 ###How the repository is organized
 
 ####Branches
-The repository is organized in various branches which show different elements that combine together in the master branch (which is the working version of the [django.zone](django.zone) page).
+The repository is organized in various branches which show different elements that combine together in the master branch (which is the working version of the [django.zone](http://django.zone) page).
 
 Example branches:
 
@@ -21,7 +21,7 @@ Example branches:
 ####Commits
 Each commit will have its correspondent blog post if it is enough significative in its pertinent section/tag (oauth, drf, etc.). 
 
-For example, in the master branch, in commit b72889d I released this blog and you can find the related post [here](django.zone). Obviously, minor modifications or bug fixes won't have a post itself but edits to the related post will be applied.
+For example, in the master branch, in commit b72889d I released this blog and you can find the related post [here](http://django.zone). Obviously, minor modifications or bug fixes won't have a post itself but edits to the related post will be applied.
 
 
 ####Tags

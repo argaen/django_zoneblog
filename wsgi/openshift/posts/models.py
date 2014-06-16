@@ -11,8 +11,8 @@ class Post(models.Model):
     content = models.TextField()
 
     commit = models.CharField(max_length=30, blank=True, null=True)
-    branch = models.URLField(max_length=150, blank=True, null=True)
-    tag = models.URLField(max_length=150, blank=True, null=True)
+    branch = models.CharField(max_length=150, blank=True, null=True)
+    tag = models.CharField(max_length=150, blank=True, null=True)
 
     def __unicode__(self):
         return self.title
@@ -21,5 +21,4 @@ class Post(models.Model):
         return "/posts/%d" % self.id
 
     class Meta:
-        ordering = ["published_on", ]
-
+        ordering = ["-published_on", ]
