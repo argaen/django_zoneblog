@@ -21,7 +21,7 @@ Example branches:
 ####Commits
 Each commit will have its correspondent blog post if it is enough significative in its pertinent section/tag (oauth, drf, etc.). 
 
-For example, in the master branch, in commit b72889d I released this blog and you can find the related post [here](http://django.zone). Obviously, minor modifications or bug fixes won't have a post itself but edits to the related post will be applied.
+For example, in the master branch, in commit b72889d I released this blog and you can find the related post [here](http://django.zone/posts/1). Obviously, minor modifications or bug fixes won't have a post itself but edits to the related post will be applied.
 
 
 ####Tags
@@ -32,15 +32,15 @@ Tags are directly related to stable commits. Oauth branch has its own tag which 
 
 In order to start, follow this steps:
 
-1. Download the commit you want to work with (the one referenced in the post you are reading). `git clone https://github.com/argaen/djangozone.git;cd djangozone;git checkout <commit number>`. Use `git checkout 5fa3548` to download the scratch version to check the basics are working fine.
+1. Download the commit you want to work with (the one referenced in the post you are reading). `git clone https://github.com/argaen/djangozone.git;cd djangozone;git checkout <commit number>`. Use `git checkout 5705de9` to download the scratch version to check the basics are working fine.
 
 2. Install the needed dependencies: `sudo pip install Django`. If you don't have _pip_ installed, install it with your distribution package manager. _Ubuntu_: `sudo apt-get install python-pip`.
 
 3. Go to `wsgi/openshift` folder and execute `python manage.py syncdb`. This will create the sqlite3 db file in the current folder.
 
-4. You can start now the development server with `python manage.py runserver`. Check it is working in your browser, accessing [localhost](http://127.0.0.1/:8000) at port 8000. You should see a _Welcome home_ message if you downloaded the commit 5fa3548.
+4. You can start now the development server with `python manage.py runserver`. Check it is working in your browser, accessing [localhost](http://127.0.0.1/:8000) at port 8000. You should see a blank page if you downloaded the commit 5705de9. 
 
-5. If the previous step worked, now execute `git checkout b72889d`, remove the sqlite3 file, and repeat the previous steps. Now you should see an exact copy of the blog without any posts. User and password for the admin is admin-123.
+5. If the previous step worked, now execute `git checkout 315807d05d`, remove the sqlite3 file, and repeat the previous steps. Now you should see an exact copy of the blog without any posts. User and password for the admin is admin-123.
 
 ###Contributions
 
