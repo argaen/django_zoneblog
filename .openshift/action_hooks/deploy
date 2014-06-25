@@ -1,4 +1,7 @@
 #!/bin/bash
 
+echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/djangozone/manage.py syncdb --noinput'"
+python "$OPENSHIFT_REPO_DIR"wsgi/djangozone/manage.py syncdb --noinput
+
 echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/djangozone/manage.py collectstatic --noinput'"
 python "$OPENSHIFT_REPO_DIR"wsgi/djangozone/manage.py collectstatic --noinput
