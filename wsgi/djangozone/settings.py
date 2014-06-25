@@ -27,10 +27,10 @@ if 'OPENSHIFT_REPO_DIR' in os.environ:
 
 if ON_OPENSHIFT:
     DEBUG = False
-    ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = ['*']
 else:
     DEBUG = True
-    ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS = []
 
 TEMPLATE_DEBUG = True
 
