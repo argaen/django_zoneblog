@@ -11,14 +11,14 @@ class Post(models.Model):
     content = models.TextField()
 
     commit = models.CharField(max_length=30, blank=True, null=True)
-    branch = models.CharField(max_length=150, blank=True, null=True)
-    tag = models.CharField(max_length=150, blank=True, null=True)
+    branch = models.URLField(max_length=150, blank=True, null=True)
+    tag = models.URLField(max_length=150, blank=True, null=True)
 
-    def __unicode__(self):
+    def __unicode__(self):    #Print object's title when printing the object
         return self.title
 
-    def get_absolute_url(self):
+    def get_absolute_url(self):     #Return the url of the object
         return "/posts/%d" % self.id
 
-    class Meta:
+    class Meta:     #Order by published_on field (newest first)
         ordering = ["-published_on", ]

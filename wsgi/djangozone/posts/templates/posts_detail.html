@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container post">
   <p>
-    <h3><a href="/posts/{{post.id}}">{{ post.title }}</a></h3>
+    <h3><a href={% url 'posts_detail' post.id %}>{{ post.title }}</a></h3>
     <p><i>{{ post.published_on }}</i> by {{ post.author }}</p>
     <p>{% if post.tags %}Tags: {{ post.tags }}{% endif %}</p>
     <p>{% if post.commit %}Commit: <a href="https://github.com/argaen/djangozone/tree/{{ post.commit }}" target=blank>{{ post.commit }}</a>{% endif %}</p>

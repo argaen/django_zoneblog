@@ -8,7 +8,6 @@ def list(request):
 
     return render(request, 'posts_list.html', data)
 
-
 def detail(request, pk):
     data = {'post': get_object_or_404(Post, pk=pk)}
 

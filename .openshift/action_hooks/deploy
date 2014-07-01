@@ -1,21 +1,7 @@
 #!/bin/bash
-# This deploy hook gets executed after dependencies are resolved and the
-# build hook has been run but before the application has been started back
-# up again.  This script gets executed directly, so it could be python, php,
-# ruby, etc.
 
-source $OPENSHIFT_HOMEDIR/python/virtenv/bin/activate
+echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/djangozone/manage.py syncdb --noinput'"
+python "$OPENSHIFT_REPO_DIR"wsgi/djangozone/manage.py syncdb --noinput
 
-if [ ! -f $OPENSHIFT_DATA_DIR/db.sqlite3 ]
-then
-    python "$OPENSHIFT_REPO_DIR".openshift/action_hooks/secure_db.py | tee ${OPENSHIFT_DATA_DIR}/CREDENTIALS
-else
-    echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/openshift/manage.py syncdb --noinput'"
-    python "$OPENSHIFT_REPO_DIR"wsgi/openshift/manage.py syncdb --noinput
-
-    # echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/openshift/manage.py migrate --noinput'"
-    # python "$OPENSHIFT_REPO_DIR"wsgi/openshift/manage.py migrate --noinput
-fi
-
-echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/openshift/manage.py collectstatic --noinput'"
-python "$OPENSHIFT_REPO_DIR"wsgi/openshift/manage.py collectstatic --noinput
+echo "Executing 'python $OPENSHIFT_REPO_DIR/wsgi/djangozone/manage.py collectstatic --noinput'"
+python "$OPENSHIFT_REPO_DIR"wsgi/djangozone/manage.py collectstatic --noinput
