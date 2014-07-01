@@ -2,7 +2,7 @@
 
 from setuptools import setup
 
-packages = ['Django']
+packages = ['Django', 'django-taggit']
 
 setup(
     name='DjangoZone',

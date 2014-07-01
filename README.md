@@ -24,10 +24,6 @@ Each commit will have its correspondent blog post if it is enough significative 
 For example, in the master branch, in commit b72889d I released this blog and you can find the related post [here](http://django.zone/posts/1). Obviously, minor modifications or bug fixes won't have a post itself but edits to the related post will be applied.
 
 
-####Tags
-Tags are directly related to stable commits. Oauth branch has its own tag which will be updated along with the branch when modifications are applied and bugs are fixed.
-
-
 ###Getting started
 
 In order to start, follow this steps:

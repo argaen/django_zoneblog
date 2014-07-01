@@ -1,18 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container post">
+<div class="col-md-11 post">
   <p>
     <h3><a href={% url 'posts_detail' post.id %}>{{ post.title }}</a></h3>
     <p><i>{{ post.published_on }}</i> by {{ post.author }}</p>
-    <p>{% if post.tags %}Tags: {{ post.tags }}{% endif %}</p>
+
+    {% if post.tags %}<p>Tags: 
+      {% for tag in post.tags.all %}
+      <a href="/posts/tag/{{ tag }}">{{tag}}</a>
+      {% if not forloop.last %},{% endif%}
+      {% endfor %}
+    </p>{% endif %}
+
     <p>{% if post.commit %}Commit: <a href="https://github.com/argaen/djangozone/tree/{{ post.commit }}" target=blank>{{ post.commit }}</a>{% endif %}</p>
     <p>{% if post.branch %}Branch: <a href="https://github.com/argaen/djangozone/tree/{{ post.branch }}" target=blank>{{ post.branch }}</a>{% endif %}</p>
-    <p>{% if post.tag %} Tag: <a href={{ post.tag }} target=blank>{{ post.tag }}</a>{% endif %}</p>
   </p>
   <div class="post-content">
     <p>{{ post.content|safe }}</p>
   </div>
+  {% if post.tags.similar_objects %}
+    Similar: 
+    {% for s in post.tags.similar_objects|slice:":3" %}
+      <a href={% url 'posts_detail' s.id %}>{{s}}</a>
+    {% if not forloop.last %},{% endif%}
+    {% endfor %}
+  {% endif %}
   <hr style="margin-bottom:40px;">
 </div>
 {% endblock %}
