@@ -1,12 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+import datetime
+
 from taggit.managers import TaggableManager
 
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
-    published_on = models.DateField(auto_now_add=True)
+    published_on = models.DateField(default=datetime.date.today)
     published = models.BooleanField(default=False)
     author = models.ForeignKey(User)
     content = models.TextField()
