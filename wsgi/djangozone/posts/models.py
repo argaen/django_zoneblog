@@ -13,7 +13,7 @@ class Post(models.Model):
     author = models.ForeignKey(User)
     content = models.TextField()
 
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
 
     commit = models.CharField(max_length=30, blank=True, null=True)
     branch = models.URLField(max_length=150, blank=True, null=True)
