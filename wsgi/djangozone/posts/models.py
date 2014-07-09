@@ -24,7 +24,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):     #Return the url of the object
-        return "/posts/%d" % self.slug
+        return "/posts/%s" % self.slug
 
     class Meta:     #Order by published_on field (newest first)
         ordering = ["-published_on", ]
