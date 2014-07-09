@@ -7,11 +7,13 @@ from taggit.managers import TaggableManager
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, unique=True)
     published_on = models.DateField(default=datetime.date.today)
     published = models.BooleanField(default=False)
     author = models.ForeignKey(User)
     content = models.TextField()
+
+    slug = models.SlugField(max_length=200,blank=True)
 
     tags = TaggableManager(blank=True)
 

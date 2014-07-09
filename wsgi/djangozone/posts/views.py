@@ -21,8 +21,8 @@ def list(request):
     return render(request, 'posts_list.html', data)
 
 
-def detail(request, pk):
-    data = {'post': get_object_or_404(Post, pk=pk)}
+def detail(request, slug):
+    data = {'post': get_object_or_404(Post, slug=slug)}
 
     return render(request, 'posts_detail.html', data)
 
