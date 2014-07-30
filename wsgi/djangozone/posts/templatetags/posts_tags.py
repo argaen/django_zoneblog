@@ -16,7 +16,7 @@ def get_tags(tags, url=None):
 
 
 @register.simple_tag
-def get_latest_posts(num=5):
+def get_latest_posts(num=10):
     posts = ""
     for post in Post.objects.all()[:num]:
         posts += "<h4><a href=%s>%s</a></h4>" % (post.get_absolute_url(), post)
