@@ -1,9 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'home.html' %}
 
 {% load posts_tags %}
 
 {% block meta_keywords %}
-{% get_tags post.tags.names %}
+  {% get_tags post.tags.names %}
 {% endblock meta_keywords %}
 
 {% block content %}

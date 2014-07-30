@@ -1,4 +1,5 @@
 from django import template
+from posts.models import Post
 
 import os
 
@@ -12,3 +13,13 @@ def get_tags(tags, url=None):
         tail = "</a>" if url else ''
         ret_tags.append(head+str(tag)+tail)
     return ', '.join(ret_tags)
+
+
+@register.simple_tag
+def get_latest_posts(num=5):
+    posts = ""
+    for post in Post.objects.all()[:num]:
+        posts += "<h4><a href=%s>%s</a></h4>" % (post.get_absolute_url(), post)
+
+    return posts
+
