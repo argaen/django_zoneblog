@@ -3,7 +3,7 @@
 {% load content_tags %}
 
 {% block base_template %}
-  <div id="main-content" class="container">
+  <div class="container">
     <div class="row">
       <div class="col-md-8">
         {% block content %}
@@ -14,7 +14,7 @@
 
           <div class="panel panel-primary">
             <div class="panel-heading">
-              <h4>Latest Posts</h4>
+              <h4><a style="color:#fff;" href={% url 'posts_list'%}> Latest Posts</a></h4>
             </div>
             <div class="panel-body">
               {% get_latest_posts %}
@@ -23,7 +23,7 @@
 
           <div class="panel panel-primary">
             <div class="panel-heading">
-              <h4>Latest News</h4>
+              <h4><a style="color:#fff;" href={% url 'newsitems_list'%}>Latest News</a></h4>
             </div>
             <div class="panel-body">
               {% get_latest_news %}

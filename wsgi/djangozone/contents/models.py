@@ -32,8 +32,8 @@ class Post(Content):
     branch = models.URLField(max_length=150, blank=True, null=True)
 
     def get_absolute_url(self):     #Return the url of the object
-        return "/content/posts/%s" % self.slug
+        return "/contents/posts/%s" % self.slug
 
 class NewsItem(Content):
     def get_absolute_url(self):     #Return the url of the object
-        return "/content/news/%s" % self.slug
+        return "/contents/news/%s" % self.slug

@@ -9,7 +9,7 @@ from models import Post, NewsItem, Content
 def contents_list(request):
     contents = sorted(
         chain(Post.objects.filter(published=True), NewsItem.objects.filter(published=True)),
-        key=attrgetter('published_on'))
+        key=attrgetter('published_on'), reverse=True)
     paginator = Paginator(contents, 5)
 
     page = request.GET.get('page')

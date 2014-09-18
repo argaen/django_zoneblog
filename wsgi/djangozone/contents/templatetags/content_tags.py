@@ -18,7 +18,7 @@ def get_tags(tags, url=None):
 @register.simple_tag
 def get_latest_posts(num=5):
     posts = ""
-    for post in Post.objects.all()[:num]:
+    for post in Post.objects.filter(published=True)[:num]:
         posts += "<h4><span class='glyphicon glyphicon-book'></span> <a href=%s>%s</a></h4>" % (post.get_absolute_url(), post)
 
     return posts
@@ -27,7 +27,7 @@ def get_latest_posts(num=5):
 @register.simple_tag
 def get_latest_news(num=5):
     news = ""
-    for n in NewsItem.objects.all()[:num]:
+    for n in NewsItem.objects.filter(published=True)[:num]:
         news += "<h4><span class='glyphicon glyphicon-info-sign'></span> <a href=%s>%s</a></h4>" % (n.get_absolute_url(), n)
 
     return news
