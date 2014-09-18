@@ -46,7 +46,7 @@ INSTALLED_APPS = (
 
     'taggit',
 
-    'posts',
+    'contents',
     'common',
 )
 

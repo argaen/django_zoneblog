@@ -1,5 +1,5 @@
 from django import template
-from posts.models import Post
+from contents.models import Post
 
 import os
 
