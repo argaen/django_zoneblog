@@ -1,50 +1,33 @@
-{% extends 'home.html' %}
+{% load content_tags %}
+<p>
 
-{% load posts_tags %}
+  <h3>
+    {% ifequal object.get_classname 'posts' %}
+      <span class="glyphicon glyphicon-book"></span>
+    {% else %}
+      <span class="glyphicon glyphicon-info-sign"></span>
+    {% endifequal %}
 
-{% block meta_keywords %}
-  {% get_tags post.tags.names %}
-{% endblock meta_keywords %}
+    <a href={% url object.get_classname|add:'_detail' object.slug %}>{{ object.title }}</a>
+  </h3>
 
-{% block content %}
-<div class="col-md-11 post">
-  <p>
-    <h3><a href={% url 'posts_detail' post.slug %}>{{ post.title }}</a></h3>
-    <p><i>{{ post.published_on }}</i> by {{ post.author }}</p>
+  <p><i>{{ object.published_on }}</i> by {{ object.author }}</p>
 
-    {% if post.tags.all %}<p>posted in 
-      {% get_tags post.tags.names "/posts/tags/" %}
-    </p>{% endif %}
+  {% if object.tags.all %}<p>posted in 
+    {% get_tags object.tags.names "/contents/"|add:object.get_classname|add:"/tags/" %}
+  </p>{% endif %}
 
-    <p>{% if post.commit %}Commit: <a href="https://github.com/argaen/djangozone/tree/{{ post.commit }}" target=blank>{{ post.commit }}</a>{% endif %}</p>
-    <p>{% if post.branch %}Branch: <a href="https://github.com/argaen/djangozone/tree/{{ post.branch }}" target=blank>{{ post.branch }}</a>{% endif %}</p>
-  </p>
-  <div class="post-content">
-    <p>{{ post.content|safe }}</p>
-  </div>
-  {% if post.tags.similar_objects %}
-    Similar: 
-    {% for s in post.tags.similar_objects|slice:":3" %}
-      <a href={% url 'posts_detail' s.slug %}>{{s}}</a>{% if not forloop.last %},{% endif%}
-    {% endfor %}
-  {% endif %}
-
-  <div id="disqus_thread" style="margin-top:20px;"></div>
-  <script type="text/javascript">
-      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-      var disqus_shortname = 'djangozone'; // required: replace example with your forum shortname
-
-      /* * * DON'T EDIT BELOW THIS LINE * * */
-      (function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
-  <hr style="margin-bottom:40px;">
+  <p>{% if object.commit %}Commit: <a href="https://github.com/argaen/djangozone/tree/{{ object.commit }}" target=blank>{{ object.commit }}</a>{% endif %}</p>
+  <p>{% if object.branch %}Branch: <a href="https://github.com/argaen/djangozone/tree/{{ object.branch }}" target=blank>{{ object.branch }}</a>{% endif %}</p>
+</p>
+<div class="post-content">
+  <p>{{ object.content|safe }}</p>
 </div>
-{% endblock %}
+{% if object.tags.similar_objects %}
+  Similar: 
+  {% for s in object.tags.similar_objects|slice:":3" %}
+    <a href={% url object.get_classname|add:'_detail' s.slug %}>{{s}}</a>{% if not forloop.last %},{% endif%}
+  {% endfor %}
+{% endif %}
+
+<hr style="margin-bottom:40px;">

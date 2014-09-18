@@ -5,7 +5,7 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^$', 'contents.views.posts_list', name='posts_list'),
+    url(r'^$', 'contents.views.contents_list', name='contents_list'),
     url(r'^contents/', include('contents.urls')),
     url(r'^about/$', 'common.views.about', name='about'),
 

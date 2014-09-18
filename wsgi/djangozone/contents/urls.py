@@ -6,8 +6,8 @@ urlpatterns = patterns(
     url(r'^posts/(?P<slug>[\w-]+)$', 'posts_detail', name='posts_detail'),
     url(r'^posts/tag/(?P<tag>\w+)$', 'posts_tags', name='posts_tags'),
 
-    url(r'^news/$', 'news_list', name='news_list'),
-    url(r'^news/(?P<slug>[\w-]+)$', 'news_detail', name='news_detail'),
-    url(r'^news/tag/(?P<tag>\w+)$', 'news_tags', name='news_tags'),
+    url(r'^news/$', 'news_list', name='newsitems_list'),
+    url(r'^news/(?P<slug>[\w-]+)$', 'news_detail', name='newsitems_detail'),
+    url(r'^news/tag/(?P<tag>\w+)$', 'news_tags', name='newsitems_tags'),
 
 )

@@ -1,8 +1,28 @@
+from operator import attrgetter
+from itertools import chain
+
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from models import Post, NewsItem
+from models import Post, NewsItem, Content
 
+def contents_list(request):
+    contents = sorted(
+        chain(Post.objects.filter(published=True), NewsItem.objects.filter(published=True)),
+        key=attrgetter('published_on'))
+    paginator = Paginator(contents, 5)
+
+    page = request.GET.get('page')
+    try:
+        contents = paginator.page(page)
+    except PageNotAnInteger:
+        contents = paginator.page(1)
+    except EmptyPage:
+        contents = paginator.page(paginator.num_pages)
+
+    data = {'objects': contents}
+
+    return render(request, 'contents_list.html', data)
 
 def posts_list(request):
     posts = Post.objects.filter(published=True)
@@ -22,9 +42,9 @@ def posts_list(request):
 
 
 def posts_detail(request, slug):
-    data = {'object': get_object_or_404(Post, slug=slug)}
+    data = {'objects': get_object_or_404(Post, slug=slug)}
 
-    return render(request, 'contents_detail.html', data)
+    return render(request, 'contents_list.html', data)
 
 
 def posts_tags(request, tag):
@@ -51,9 +71,9 @@ def news_list(request):
 
 
 def news_detail(request, slug):
-    data = {'object': get_object_or_404(NewsItem, slug=slug)}
+    data = {'objects': get_object_or_404(NewsItem, slug=slug)}
 
-    return render(request, 'contents_detail.html', data)
+    return render(request, 'contents_list.html', data)
 
 
 def news_tags(request, tag):

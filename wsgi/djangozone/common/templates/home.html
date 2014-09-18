@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load posts_tags %}
+{% load content_tags %}
 
 {% block base_template %}
   <div id="main-content" class="container">
@@ -18,6 +18,15 @@
             </div>
             <div class="panel-body">
               {% get_latest_posts %}
+            </div>
+          </div>
+
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h4>Latest News</h4>
+            </div>
+            <div class="panel-body">
+              {% get_latest_news %}
             </div>
           </div>
 

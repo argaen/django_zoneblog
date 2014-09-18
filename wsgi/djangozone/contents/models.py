@@ -19,6 +19,9 @@ class Content(models.Model):
     def __unicode__(self):    #Print object's title when printing the object
         return self.title
 
+    def get_classname(self):
+        return self.__class__.__name__.lower()+'s'
+
     class Meta:     #Order by published_on field (newest first)
         ordering = ["-published_on", ]
         abstract = True

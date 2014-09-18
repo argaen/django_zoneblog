@@ -1,33 +1,24 @@
 {% extends 'home.html' %}
 
-{% load posts_tags %}
+{% load content_tags %}
+
+{% block meta_keywords %}
+  {% get_tags object.tags.names %}
+{% endblock meta_keywords %}
 
 {% block content %}
-<div class="col-md-11 post">
-  {% for post in posts %}
-    <p>
-      <h3><a href={% url "posts_detail" post.slug %}>{{ post.title }}</a></h3>
-      <p><i>{{ post.published_on }}</i> by {{ post.author }}</p>
-      {% if post.tags.all %}<p>posted in  
-        {% get_tags post.tags.names "/posts/tags/" %}
-      </p>{% endif %}
-
-      <p>{% if post.commit %}Commit: <a href="https://github.com/argaen/djangozone/tree/{{ post.commit }}" target=blank>{{ post.commit }}</a>{% endif %}</p>
-      <p>{% if post.branch %}Branch: <a href="https://github.com/argaen/djangozone/tree/{{ post.branch }}" target=blank>{{ post.branch }}</a>{% endif %}</p>
-      <p>{% if post.tag %} Tag: <a href={{ post.tag }} target=blank>{{ post.tag }}</a>{% endif %}</p>
-    </p>
-    <div class="post-content">
-      <p>{{ post.content|safe|truncatewords_html:100 }}</p>
-    </div>
-    <a class="btn btn-primary" href={% url "posts_detail" post.slug %}>Read more</a>
-    <hr style="margin-bottom:40px;">
-  {% endfor %}
-
-  <div class="paginator">
-    {% for p in posts.paginator.page_range %} 
-      <a class="btn btn-primary {% ifequal p posts.number %}btn-success{% endifequal %} btn-sm" href="?page={{ p }}">{{p}}</a>
+  {% if objects.paginator %}
+    {% for object in objects %}
+      <div class="col-md-11 post">
+        {% include 'contents_detail.html' %}
+      </div>
     {% endfor %}
-  </div>
-
-</div>
+  {% else %}
+    {% with objects as object %}
+      <div class="col-md-11 post">
+        {% include 'contents_detail.html' %}
+        {% include 'disqus_comments.html' %}
+      </div>
+    {% endwith %}
+  {% endif %}
 {% endblock %}
