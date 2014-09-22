@@ -20,14 +20,23 @@
   <p>{% if object.commit %}Commit: <a href="https://github.com/argaen/djangozone/tree/{{ object.commit }}" target=blank>{{ object.commit }}</a>{% endif %}</p>
   <p>{% if object.branch %}Branch: <a href="https://github.com/argaen/djangozone/tree/{{ object.branch }}" target=blank>{{ object.branch }}</a>{% endif %}</p>
 </p>
-<div class="post-content">
-  <p>{{ object.content|safe }}</p>
-</div>
-{% if object.tags.similar_objects %}
-  Similar: 
-  {% for s in object.tags.similar_objects|slice:":3" %}
-    <a href={% url object.get_classname|add:'_detail' s.slug %}>{{s}}</a>{% if not forloop.last %},{% endif%}
-  {% endfor %}
+
+{% if list %}
+  <div class="post-content">
+    <p>{{ object.content|truncatechars_html:1000|safe }}</p>
+  </div>
+  <a class="btn btn-primary" href={% url "posts_detail" object.slug %}>Read more</a>
+
+{% else %}
+  <div class="post-content">
+    <p>{{ object.content|safe }}</p>
+  </div>
+  {% if object.tags.similar_objects %}
+    Similar: 
+    {% for s in object.tags.similar_objects|slice:":3" %}
+      <a href={% url object.get_classname|add:'_detail' s.slug %}>{{s}}</a>{% if not forloop.last %},{% endif%}
+    {% endfor %}
+  {% endif %}
 {% endif %}
 
 <hr style="margin-bottom:40px;">
