@@ -1,4 +1,9 @@
-{% load content_tags %}
+{% load content_tags highlights staticfiles %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href={% static "css/pygments-colorful.css" %}>
+{% endblock styles %}
+
 <p>
 
   <h3>
@@ -23,13 +28,13 @@
 
 {% if list %}
   <div class="post-content">
-    <p>{{ object.content|truncatechars_html:1000|safe }}</p>
+    <p>{{ object.content|truncatechars_html:1000|highlight_code|safe }}</p>
   </div>
   <a class="btn btn-primary" href={% url "posts_detail" object.slug %}>Read more</a>
 
 {% else %}
   <div class="post-content">
-    <p>{{ object.content|safe }}</p>
+    <p>{{ object.content|highlight_code|safe }}</p>
   </div>
   {% if object.tags.similar_objects %}
     Similar: 
