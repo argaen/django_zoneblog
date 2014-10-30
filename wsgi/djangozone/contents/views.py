@@ -80,3 +80,33 @@ def news_tags(request, tag):
     data = {'objects': NewsItem.objects.filter(tags__name__in=[tag])}
 
     return render(request, 'contents_list.html', data)
+
+
+def demos_list(request):
+    demos = Demo.objects.filter(published=True)
+    paginator = Paginator(news, 5)
+
+    page = request.GET.get('page')
+    try:
+        demos = paginator.page(page)
+    except PageNotAnInteger:
+        demos = paginator.page(1)
+    except EmptyPage:
+        demos = paginator.page(paginator.num_pages)
+
+    data = {'objects': demos}
+
+    return render(request, 'contents_list.html', data)
+
+
+def demos_detail(request, slug):
+    obj = get_object_or_404(Demo, slug=slug)
+    data = {'objects': obj}
+
+    return render(request, obj.template if obj.template else 'contents_list.html', data)
+
+
+def demos_tags(request, tag):
+    data = {'objects': Demo.objects.filter(tags__name__in=[tag])}
+
+    return render(request, 'contents_list.html', data)

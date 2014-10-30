@@ -10,4 +10,8 @@ urlpatterns = patterns(
     url(r'^news/(?P<slug>[\w-]+)$', 'news_detail', name='newsitems_detail'),
     url(r'^news/tag/(?P<tag>\w+)$', 'news_tags', name='newsitems_tags'),
 
+    url(r'^demos/$', 'demos_list', name='demos_list'),
+    url(r'^demos/(?P<slug>[\w-]+)$', 'demos_detail', name='demos_detail'),
+    url(r'^demos/tag/(?P<tag>\w+)$', 'demos_tags', name='demos_tags'),
+
 )

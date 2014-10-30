@@ -31,9 +31,18 @@ class Post(Content):
     commit = models.CharField(max_length=30, blank=True, null=True)
     branch = models.URLField(max_length=150, blank=True, null=True)
 
-    def get_absolute_url(self):     #Return the url of the object
+    def get_absolute_url(self):
         return "/contents/posts/%s" % self.slug
 
+
 class NewsItem(Content):
-    def get_absolute_url(self):     #Return the url of the object
+    def get_absolute_url(self):
         return "/contents/news/%s" % self.slug
+
+
+class Demo(models.Model):
+    template = models.CharField(max_length=200, blank=True, null=True)
+
+    def get_absolute_url(self):
+        return "/contents/demos/%s" % self.slug
+
