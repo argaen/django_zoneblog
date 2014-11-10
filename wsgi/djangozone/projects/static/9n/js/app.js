@@ -1,10 +1,9 @@
 (function(){
   var app = angular.module('cartomap', ['ui.bootstrap']);
+  var greenramp = d3.scale.linear().domain([0,100]).range(["#fff","#3B7522"]);
+
   app.config(function($interpolateProvider){
         $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
-  });
-
-  app.controller('TabController', function(){
   });
 
   var colors = { 'S\xED - S\xED': '#3B7522',
@@ -187,7 +186,7 @@
             .attr("ng-mouseover", function(d) {
               return "setOnHoverData('"+String(d.properties.comarca_str).replace("'", "\\\'")+"', '"+d.properties.comarca+"')";
             })
-            .attr("fill", function(d) { return colors[scope.map.ndata[parseInt(d.properties.comarca)][0].sigles.trim()]; })
+            .attr("fill", function(d) { return greenramp(parseInt(scope.map.ndata[parseInt(d.properties.comarca)][0].percent)); })
             .attr("class", "comarca")
             .attr("d", path)
 
