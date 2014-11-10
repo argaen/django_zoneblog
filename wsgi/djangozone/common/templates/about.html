@@ -2,11 +2,18 @@
 
 {% load staticfiles %}
 
+
+{% block menu %}
+  <li><a href="/">Home</a></li>
+  <li><a href="/projects">Projects</a></li>
+  <li class="disabled"><a href="#packages">Timeline</a></li>
+  <li class="active"><a href="/about">About</a></li>
+{% endblock menu %}
+
 {% block base_template %}
 <div class="container" >
   <div class="row">
     <div class="col-md-6">
-      <img src={% static "img/me.png" %}></img>
       Curious, dynamic and kind of cute :D. I love speaking about anything though looking at my screen during hours is even better. Always ready to learn new (cool&interesting) things and waste time with them because time doesn't matter when you are happy with what you do.
       <h4 class="page-header">/Experience</h4>
 
@@ -33,6 +40,7 @@
         <li><i class="glyphicon glyphicon-comment"></i> <a target="_blank" href="http://twitter.com/djangozone">Twitter</a></li>
         <li><i class="glyphicon glyphicon-comment"></i> <a target="_blank" href="http://bitbucket.org/argaen">Bitbucket</a></li>
         <li><i class="glyphicon glyphicon-comment"></i> <a target="_blank" href="http://stackoverflow.com/users/3481357/djangozone">StackOverflow</a></li>
+        <li><i class="glyphicon glyphicon-comment"></i> <a target="_blank" href="https://www.linkedin.com/profile/view?id=156606310&trk=nav_responsive_tab_profile_pic">LinkedIn</a></li>
       </ul>
     </div>
     <div class="col-md-6">

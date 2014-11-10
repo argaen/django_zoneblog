@@ -27,7 +27,6 @@
   </head>
 
   <body>
-    <div id="header-img" style="background-image: url({% static "img/header.jpg" %});"></div>
     <div class="navbar navbar-default" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -43,6 +42,7 @@
           <ul class="nav navbar-nav pull-right">
             {% block menu %}
               <li class="active"><a href="/">Home</a></li>
+              <li><a href="/projects">Projects</a></li>
               <li class="disabled"><a href="#packages">Timeline</a></li>
               <li><a href="/about">About</a></li>
             {% endblock menu %}

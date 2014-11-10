@@ -1,0 +1,19 @@
+{% verbatim %}
+  <ul>
+    <li ng-repeat="vot in stats.vots" style="list-style:none">
+      <div class="row">
+        <div class="col-xs-4">
+          <span style="width:10px; height:10px; background:{{stats.colors[vot.sigles.trim()]}};display:inline-block;margin-right:5px;"></span> 
+          {{vot.sigles.trim()}}:
+        </div>
+        <div class="col-xs-2">
+          {{vot.vots}}
+        </div>
+        <div class="col-xs-4">
+          {{stats.percent_vots[vot.sigles]}}%
+        </div>
+      </div>
+    </li>
+
+  </ul>
+{% endverbatim %}

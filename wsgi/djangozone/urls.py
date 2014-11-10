@@ -7,6 +7,7 @@ urlpatterns = patterns(
     '',
     url(r'^$', 'contents.views.contents_list', name='contents_list'),
     url(r'^contents/', include('contents.urls')),
+    url(r'^projects/', include('projects.urls')),
     url(r'^about/$', 'common.views.about', name='about'),
 
     url(r'^admin/', include(admin.site.urls)),
