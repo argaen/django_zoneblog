@@ -120,8 +120,8 @@
       restrict: 'A',
       controllerAs: 'map',
       controller: function() {
-        this.comarca_str = "";
-        this.comarca_color = "";
+        this.str_id = "";
+        this.color = "";
         this.vote_data;
         this.ndata = {};
         this.lol = {}
@@ -129,13 +129,31 @@
 
       link: function (scope, element, attrs) {
         scope.setOnHoverData = function(name, element_id) {
-          scope.map.comarca_str = name;
+          scope.map.str_id = name;
           scope.map.vote_data = scope.map.ndata[parseInt(element_id)].slice();
-          scope.map.comarca_color = colors[scope.map.vote_data[0].sigles.trim()];
+          scope.map.color = colors[scope.map.vote_data[0].sigles.trim()];
           scope.stats.vots = scope.map.vote_data.slice();
           scope.stats.vots.sort(function(a,b) {
             return a.vots < b.vots;
           });
+        }
+        var showData = function() {
+          zones = svg.selectAll(".zone")
+            .data(geodata)
+            .enter().append("path")
+            .attr("id", function(d) {
+              return d.properties.id;
+            })
+            .attr("ng-mouseover", function(d) {
+              return "setOnHoverData('"+String(d.properties.id_str).replace("'", "\\\'")+"', '"+d.properties.id+"')";
+            })
+            .attr("fill", function(d) { return greenramp(parseInt(scope.map.ndata[parseInt(d.properties.id)][0].percent)); })
+            .attr("class", "zone")
+            .attr("d", path)
+
+
+          element.removeAttr("map-canvas");
+          $compile(element)(scope);
         }
 
         var projection = d3.geo.mercator()
@@ -153,48 +171,37 @@
         var geodata;
         var data;
 
-        d3.csv("/static/9n/data/9n.csv", function(d) {
-          return {
-            sigles: d.Sigles,
-            vots: +d.Vots,
-            comarca: +d["Codi Comarca"],
-            percent: d.percent,
-          };
-        }, function(error, rows) {
-          data=d3.nest()
-            .key(function(d) {return parseInt(d.comarca);})
-            .sortKeys(d3.ascending)
-            .entries(rows);
-          data.forEach(function(e) {
-            scope.map.ndata[e.key] = e.values;
+        scope.render = function(data) {
+
+          d3.csv("/static/9n/data/"+scope.map.source+"9n.csv", function(d) {
+            return {
+              sigles: d.Sigles,
+              vots: +d.Vots,
+              id: +d["Codi"],
+              percent: d.percent,
+            };
+          }, function(error, rows) {
+            data=d3.nest()
+              .key(function(d) {return parseInt(d.id);})
+              .sortKeys(d3.ascending)
+              .entries(rows);
+            data.forEach(function(e) {
+              scope.map.ndata[e.key] = e.values;
+            });
+
+            //Wait for votes parsing before displaying the map
+            d3.json("/static/9n/data/geo/"+scope.map.source+".topo.json", function(error, cat) {
+              geodata= topojson.feature(cat, cat.objects.comarques).features;
+              showData();
+            });
           });
-
-          //Wait for votes parsing before displaying the map
-          d3.json("/static/9n/data/geo/comarques.topo.json", function(error, cat) {
-            geodata = topojson.feature(cat, cat.objects.comarques).features;
-            showData();
-          });
-        });
-
-        var showData = function() {
-          comarques = svg.selectAll(".comarca")
-            .data(geodata)
-            .enter().append("path")
-            .attr("id", function(d) {
-              return d.properties.comarca;
-            })
-            .attr("ng-mouseover", function(d) {
-              return "setOnHoverData('"+String(d.properties.comarca_str).replace("'", "\\\'")+"', '"+d.properties.comarca+"')";
-            })
-            .attr("fill", function(d) { return greenramp(parseInt(scope.map.ndata[parseInt(d.properties.comarca)][0].percent)); })
-            .attr("class", "comarca")
-            .attr("d", path)
-
-
-          element.removeAttr("map-canvas");
-          $compile(element)(scope);
         }
 
+        scope.$watch('map.source', function(newVal, oldVal){
+          if (newVal!=undefined) {
+            scope.render(newVal);
+          }
+        }, true);
       }
 
     };

@@ -24,7 +24,9 @@
   <div class="container" ng-app="cartomap" style="display:block;">
     <div class="row">
       <div class="col-md-7">
-        <div map-canvas style="padding:30px;"></div>
+        <button class="btn btn-primary" ng-click="map.source = 'comarques'">Comarques</button>
+        <button class="btn btn-primary" ng-click="map.source = 'municipis'">Municipis</button>
+        <div map-canvas ng-init="map.source = 'comarques'" style="padding:30px;"></div>
       </div>
       <div class="col-md-5">
         <h3 style="color: {[{map.comarca_color}]};"> {[{ map.comarca_str }]} </h3>
@@ -41,7 +43,7 @@
       </div>
     </div>
     <div class="row" style="margin-bottom:60px;">
-      <p class="alert alert-info">Les dades de les votacions han estat extretes de <a target="_blank" href="http://www.participa2014.cat">participa2014.cat</a></p>
+      <p class="alert alert-info">Les dades de les votacions han estat extretes de <a target="_blank" href="http://www.participa2014.cat">participa2014.cat</a>. Última actualització el 10 de Novembre de 2014.</p>
       <p class="alert alert-info">Les dades cartogr&agrave;fiques han estat extretes de l'<a target="_blank" href="http://www.icc.es/">Institut Cartogr&agrave;fic i Geol&ograve;gic de Catalunya</a></p>
     </div>
   </div>

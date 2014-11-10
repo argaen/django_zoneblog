@@ -1,6 +1,3 @@
-.comarca {
-  stroke: rgb(50, 50, 50);
-}
-.comarca:hover {
+.zone:hover {
   fill: rgb(40, 40, 40);
 }
