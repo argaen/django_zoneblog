@@ -114,7 +114,7 @@
   });
 
   app.directive('mapCanvas', ['$compile', function ($compile) {
-    var width = 790, height = 570;
+    var width = 690, height = 570;
 
     return {
       restrict: 'A',
@@ -138,35 +138,53 @@
           });
         }
         var showData = function() {
+          svg.selectAll("*").remove();
+
           zones = svg.selectAll(".zone")
             .data(geodata)
             .enter().append("path")
             .attr("id", function(d) {
+              if (scope.map.source == 'municipis')
+                d.properties.id = d.properties.id.substring(0, d.properties.id.length - 1);
               return d.properties.id;
             })
+            .attr("id_str", function(d) {
+              return d.properties.id_str;
+            })
             .attr("ng-mouseover", function(d) {
-              return "setOnHoverData('"+String(d.properties.id_str).replace("'", "\\\'")+"', '"+d.properties.id+"')";
+              return "setOnHoverData('"+String(d.properties.id_str).replace(/'/g, "\\\'")+"', '"+d.properties.id+"')";
             })
             .attr("fill", function(d) { return greenramp(parseInt(scope.map.ndata[parseInt(d.properties.id)][0].percent)); })
             .attr("class", "zone")
-            .attr("d", path)
+            .attr("d", path);
 
 
           element.removeAttr("map-canvas");
           $compile(element)(scope);
         }
 
+        scope.map.source = 'comarques';
+
         var projection = d3.geo.mercator()
-            .center([2.3,41.7])
+            .center([1.7,41.7])
             .scale(10500)
             .translate([width / 2, height / 2]);
 
         var path = d3.geo.path()
             .projection(projection);
 
+        var z = d3.behavior.zoom().scaleExtent([1, 8]);
+
         var svg = d3.select(element[0]).append("svg")
             .attr("width", width)
-            .attr("height", height);
+            .attr("height", height)
+            .append("g")
+            .call(z.on("zoom", zoom))
+            .append("g");
+
+        function zoom() {
+            svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        }
 
         var geodata;
         var data;
@@ -191,7 +209,7 @@
 
             //Wait for votes parsing before displaying the map
             d3.json("/static/9n/data/geo/"+scope.map.source+".topo.json", function(error, cat) {
-              geodata= topojson.feature(cat, cat.objects.comarques).features;
+              geodata = topojson.feature(cat, cat.objects[scope.map.source]).features;
               showData();
             });
           });
