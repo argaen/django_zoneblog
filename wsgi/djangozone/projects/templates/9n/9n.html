@@ -24,8 +24,8 @@
   <div class="container" ng-app="cartomap" style="display:block;">
     <div class="row">
       <div class="col-md-7">
-        <button class="btn btn-primary" ng-click="map.source = 'comarques'">Comarques</button>
-        <button class="btn btn-primary" ng-click="map.source = 'municipis'">Municipis</button>
+        <button class="btn btn-primary" ng-click="map.source = 'comarques'; stats.current_vots = 'Sí - Sí'">Comarques</button>
+        <button class="btn btn-primary" ng-click="map.source = 'municipis'; stats.current_vots = 'Sí - Sí'">Municipis</button>
         <div map-canvas style="margin:30px 0;"></div>
       </div>
       <div class="col-md-5">
