@@ -1,15 +1,15 @@
 {% verbatim %}
   <ul>
     <li ng-repeat="vot in stats.vots" style="list-style:none">
-      <div class="row">
-        <div class="col-xs-4">
+      <div class="row data-type-row" ng-click="stats.current_vots = vot.sigles.trim()">
+        <div class="col-xs-4 data-type data-type-left" ng-class="{'active': vot.sigles.trim() == stats.current_vots}">
           <span style="width:10px; height:10px; background:{{stats.colors[vot.sigles.trim()]}};display:inline-block;margin-right:5px;"></span> 
           {{vot.sigles.trim()}}:
         </div>
-        <div class="col-xs-2">
+        <div class="col-xs-2 data-type" ng-class="{'active': vot.sigles.trim() == stats.current_vots}">
           {{vot.vots}}
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-4 data-type data-type-right" ng-class="{'active': vot.sigles.trim() == stats.current_vots}">
           {{stats.percent_vots[vot.sigles]}}%
         </div>
       </div>

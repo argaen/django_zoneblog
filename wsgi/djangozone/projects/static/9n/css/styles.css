@@ -1,3 +1,18 @@
 .zone:hover {
   fill: rgb(40, 40, 40);
 }
+
+.data-type-row {
+  cursor: pointer;
+}
+.data-type.active {
+  background-color: #A0A7DA;
+}
+.data-type-left.active {
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.data-type-right.active {
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}

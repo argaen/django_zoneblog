@@ -1,6 +1,11 @@
 (function(){
   var app = angular.module('cartomap', ['ui.bootstrap']);
   var greenramp = d3.scale.linear().domain([0,100]).range(["#fff","#3B7522"]);
+  var redramp = d3.scale.linear().domain([0,100]).range(["#fff","#C1001A"]);
+  var yellowramp = d3.scale.linear().domain([0,100]).range(["#fff","#E18925"]);
+  var purpleramp = d3.scale.linear().domain([0,100]).range(["#fff","#66298E"]);
+  var blueramp = d3.scale.linear().domain([0,100]).range(["#fff","#0066CC"]);
+  var whiteramp = d3.scale.linear().domain([0,100]).range(["#fff","#00BDCE"]);
 
   app.config(function($interpolateProvider){
         $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
@@ -9,9 +14,16 @@
   var colors = { 'S\xED - S\xED': '#3B7522',
                  'S\xED - No': '#E18925',
                  'No': '#C1001A',
-                 'En blanc': '#FFFFCC',
+                 'En blanc': '#00BDCE',
                  'Altres': '#66298E',
                  'S\xED - En blanc': '#0066CC', }
+
+  var scale_colors = { 'S\xED - S\xED': greenramp,
+                 'S\xED - No': yellowramp,
+                 'No': redramp,
+                 'En blanc': whiteramp,
+                 'Altres': purpleramp,
+                 'S\xED - En blanc': blueramp, }
 
   app.directive('stats', function() {
 
@@ -20,6 +32,7 @@
       templateUrl: '/projects/9n/stats.html',
       controllerAs: 'stats',
       controller: function() {
+        this.current_vots = "Sí - Sí";
         this.colors = colors;
         this.vots = [];
         this.percent_vots = {'total': 0};
@@ -114,7 +127,7 @@
   });
 
   app.directive('mapCanvas', ['$compile', function ($compile) {
-    var width = 690, height = 570;
+    var width = 690, height = 580;
 
     return {
       restrict: 'A',
@@ -124,7 +137,7 @@
         this.color = "";
         this.vote_data;
         this.ndata = {};
-        this.lol = {}
+        this.ndata_by_sigles = {};
       },
 
       link: function (scope, element, attrs) {
@@ -155,6 +168,8 @@
               return "setOnHoverData('"+String(d.properties.id_str).replace(/'/g, "\\\'")+"', '"+d.properties.id+"')";
             })
             .attr("fill", function(d) { return greenramp(parseInt(scope.map.ndata[parseInt(d.properties.id)][0].percent)); })
+            .attr("stroke", "#ddd")
+            .attr("stroke-width", "0.4")
             .attr("class", "zone")
             .attr("d", path);
 
@@ -204,6 +219,10 @@
               .sortKeys(d3.ascending)
               .entries(rows);
             data.forEach(function(e) {
+              scope.map.ndata_by_sigles[e.key] = {};
+              angular.forEach(e.values, function(value, key) {
+                scope.map.ndata_by_sigles[e.key][value.sigles] = value;
+              });
               scope.map.ndata[e.key] = e.values;
             });
 
@@ -219,6 +238,10 @@
           if (newVal!=undefined) {
             scope.render(newVal);
           }
+        }, true);
+        scope.$watch('stats.current_vots', function(newVal, oldVal){
+          svg.selectAll(".zone")
+            .attr("fill", function(d) { return scale_colors[newVal](parseInt(scope.map.ndata_by_sigles[parseInt(d.properties.id)][newVal].percent) ? parseInt(scope.map.ndata_by_sigles[parseInt(d.properties.id)][newVal].percent) : 1); });
         }, true);
       }
 
