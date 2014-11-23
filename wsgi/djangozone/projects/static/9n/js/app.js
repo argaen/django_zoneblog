@@ -168,8 +168,8 @@
               return "setOnHoverData('"+String(d.properties.id_str).replace(/'/g, "\\\'")+"', '"+d.properties.id+"')";
             })
             .attr("fill", function(d) { return greenramp(parseInt(scope.map.ndata[parseInt(d.properties.id)][0].percent)); })
-            .attr("stroke", "#ddd")
-            .attr("stroke-width", "0.4")
+            .attr("stroke", "#000")
+            .attr("stroke-width", "0.2")
             .attr("class", "zone")
             .attr("d", path);
 
