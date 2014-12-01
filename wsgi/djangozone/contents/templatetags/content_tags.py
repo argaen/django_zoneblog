@@ -1,5 +1,8 @@
 from django import template
-from contents.models import Post, NewsItem
+from contents.models import Content, Post, NewsItem, Project
+
+from operator import attrgetter
+from itertools import chain
 
 import os
 
@@ -16,18 +19,14 @@ def get_tags(tags, url=None):
 
 
 @register.simple_tag
-def get_latest_posts(num=5):
-    posts = ""
-    for post in Post.objects.filter(published=True)[:num]:
-        posts += "<h4><span class='glyphicon glyphicon-book'></span> <a href=%s>%s</a></h4>" % (post.get_absolute_url(), post)
+def get_latest_contents(num=5):
+    contents_list = sorted(
+            chain(Post.objects.filter(published=True),
+                NewsItem.objects.filter(published=True),
+                Project.objects.filter(published=True)),
+            key=attrgetter('published_on'), reverse=True)
+    contents = ""
+    for c in contents_list[:num]:
+        contents += "<h4><span class='glyphicon glyphicon-plus'></span> <a href=%s>%s</a></h4>" % (c.get_absolute_url(), c)
 
-    return posts
-
-
-@register.simple_tag
-def get_latest_news(num=5):
-    news = ""
-    for n in NewsItem.objects.filter(published=True)[:num]:
-        news += "<h4><span class='glyphicon glyphicon-info-sign'></span> <a href=%s>%s</a></h4>" % (n.get_absolute_url(), n)
-
-    return news
+    return contents

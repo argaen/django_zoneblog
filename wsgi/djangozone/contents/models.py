@@ -40,9 +40,9 @@ class NewsItem(Content):
         return "/contents/news/%s" % self.slug
 
 
-class Demo(models.Model):
+class Project(Content):
     template = models.CharField(max_length=200, blank=True, null=True)
 
     def get_absolute_url(self):
-        return "/contents/demos/%s" % self.slug
+        return "/projects/%s" % self.slug
 

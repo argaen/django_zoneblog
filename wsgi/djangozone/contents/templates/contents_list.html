@@ -1,29 +1,51 @@
 {% extends 'home.html' %}
 
-{% load content_tags %}
+{% load content_tags staticfiles %}
 
-{% block meta_keywords %}
-  {% get_tags object.tags.names %}
-{% endblock meta_keywords %}
+{% block title %}
+{% if objects.title %}
+  {{ objects.title }}
+{% else %}
+  Posts
+{% endif %}
+{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" type="text/css" href={% static "css/pygments-colorful.css" %}>
+{% endblock styles %}
+
+{% block meta_keywords %}{% if not objects.paginator %}{% with objects as object %}{% get_tags object.tags.names %}{% endwith %}{% endif %}{% endblock meta_keywords %}
 
 {% block content %}
-  {% if objects.paginator %}
-    {% for object in objects %}
-      <div class="col-md-11 post">
-        {% include 'contents_detail.html' with list="True" %}
-      </div>
-    {% endfor %}
-    <div class="paginator col-md-11" style="margin-bottom:20px;">
-      {% for p in objects.paginator.page_range %} 
-        <a class="btn btn-primary {% ifequal p objects.number %}btn-success{% endifequal %} btn-sm" href="?page={{ p }}">{{p}}</a>
+  <div class="col-md-8">
+    {% if objects.paginator %}
+      {% for object in objects %}
+        <div class="col-md-11 post">
+          {% include 'contents_detail.html' with list="True" %}
+        </div>
       {% endfor %}
-    </div>
-  {% else %}
-    {% with objects as object %}
-      <div class="col-md-11 post">
-        {% include 'contents_detail.html' %}
-        {% include 'disqus_comments.html' %}
+      <div class="paginator col-md-11" style="margin-bottom:20px;">
+        {% for p in objects.paginator.page_range %} 
+          <a class="btn btn-primary {% ifequal p objects.number %}btn-success{% endifequal %} btn-sm" href="?page={{ p }}">{{p}}</a>
+        {% endfor %}
       </div>
-    {% endwith %}
+    {% else %}
+      {% with objects as object %}
+        <div class="col-md-11 post">
+          {% if object.template %}
+            {% include object.get_classname|add:"/"|add:object.template %}
+          {% else %}
+            {% include 'contents_detail.html' %}
+          {% endif %}
+          {% include 'disqus_comments.html' %}
+        </div>
+      {% endwith %}
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block sidebar %}
+  {% if not objects.template %}
+    {% include 'sidebar.html' %}
   {% endif %}
 {% endblock %}

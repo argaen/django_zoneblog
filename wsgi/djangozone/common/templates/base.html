@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content={% block meta_description %}"Find everything you want to know here in DjangoZone!"{% endblock %}>
-    <meta name="keywords" content="django project, djangoproject, django tutorial, django example, blog, django models, django views, django urls,{% block meta_keywords %}{% endblock %}">
+    <meta name="keywords" content="django project, djangoproject, django tutorial, django example, blog, {% block meta_keywords %} django models, django views, django urls,{% endblock %}">
     <meta name="author" content="djangozone">
 
     <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href={% static "css/styles.css" %}>
 
 
-    <title>Django Zone{% block title %}{% endblock title %}</title>
+    <title>{% block title %}Django Zone{% endblock title %}</title>
 
     <!-- Custom styles for this template -->
     {% block styles %}
@@ -42,7 +42,6 @@
           <ul class="nav navbar-nav pull-right">
             {% block menu %}
               <li class="active"><a href="/">Home</a></li>
-              <li><a href="/projects">Projects</a></li>
               <li class="disabled"><a href="#packages">Timeline</a></li>
               <li><a href="/about">About</a></li>
             {% endblock menu %}

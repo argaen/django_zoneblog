@@ -5,42 +5,13 @@
 {% block base_template %}
   <div class="container">
     <div class="row">
-      <div class="col-md-8">
-        {% block content %}
-        {% endblock content %}
-      </div>
-      <div class="col-md-4">
-        <div class="col-md-11 col-md-offset-1">
-
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h4><a style="color:#fff;" href={% url 'posts_list'%}> Latest Posts</a></h4>
-            </div>
-            <div class="panel-body">
-              {% get_latest_posts %}
-            </div>
-          </div>
-
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h4><a style="color:#fff;" href={% url 'newsitems_list'%}>Latest News</a></h4>
-            </div>
-            <div class="panel-body">
-              {% get_latest_news %}
-            </div>
-          </div>
-
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h4>Recent Comments</h4>
-            </div>
-            <div id="RecentComments" class="dsq-widget panel-body">
-              <script type="text/javascript" src="http://djangozone.disqus.com/recent_comments_widget.js?num_items=5&hide_mods=0&hide_avatars=0&avatar_size=32&excerpt_length=100"></script>
-            </div>
-          </div>
-
+      {% block content %}
+        <div class="col-md-8">
         </div>
-      </div>
+      {% endblock content %}
+      {% block sidebar %}
+        {% include 'sidebar.html' %}
+      {% endblock %}
     </div>
   </div>
 {% endblock %}

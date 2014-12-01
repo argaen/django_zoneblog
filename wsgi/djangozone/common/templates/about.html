@@ -3,9 +3,12 @@
 {% load staticfiles %}
 
 
+{% block title %}
+About
+{% endblock %}
+
 {% block menu %}
   <li><a href="/">Home</a></li>
-  <li><a href="/projects">Projects</a></li>
   <li class="disabled"><a href="#packages">Timeline</a></li>
   <li class="active"><a href="/about">About</a></li>
 {% endblock menu %}

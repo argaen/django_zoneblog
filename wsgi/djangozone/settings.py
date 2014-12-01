@@ -48,7 +48,6 @@ INSTALLED_APPS = (
 
     'contents',
     'common',
-    'projects',
 )
 
 MIDDLEWARE_CLASSES = (

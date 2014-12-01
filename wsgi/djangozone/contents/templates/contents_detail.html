@@ -1,17 +1,14 @@
 {% load content_tags highlights staticfiles %}
 
-{% block styles %}
-    <link rel="stylesheet" type="text/css" href={% static "css/pygments-colorful.css" %}>
-{% endblock styles %}
-
 <p>
-
   <h3>
-    {% ifequal object.get_classname 'posts' %}
+    {% if object.get_classname == 'posts' %}
       <span class="glyphicon glyphicon-book"></span>
+    {% elif object.get_classname == 'projects' %}
+      <span class="glyphicon glyphicon-pencil"></span>
     {% else %}
       <span class="glyphicon glyphicon-info-sign"></span>
-    {% endifequal %}
+    {% endif %}
 
     <a href={% url object.get_classname|add:'_detail' object.slug %}>{{ object.title }}</a>
   </h3>
@@ -19,7 +16,7 @@
   <p><i>{{ object.published_on }}</i> by {{ object.author }}</p>
 
   {% if object.tags.all %}<p>posted in 
-    {% get_tags object.tags.names "/contents/"|add:object.get_classname|add:"/tags/" %}
+    {% get_tags object.tags.names "/contents/"|add:object.get_classname|add:"/tag/" %}
   </p>{% endif %}
 
   <p>{% if object.commit %}Commit: <a href="https://github.com/argaen/djangozone/tree/{{ object.commit }}" target=blank>{{ object.commit }}</a>{% endif %}</p>
@@ -30,7 +27,7 @@
   <div class="post-content">
     <p>{{ object.content|truncatechars_html:1000|highlight_code|safe }}</p>
   </div>
-  <a class="btn btn-primary" href={% url "posts_detail" object.slug %}>Read more</a>
+  <a class="btn btn-primary" href={% url object.get_classname|add:'_detail' object.slug %}>Read more</a>
 
 {% else %}
   <div class="post-content">
