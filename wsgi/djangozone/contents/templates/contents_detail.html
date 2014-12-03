@@ -1,27 +1,5 @@
 {% load content_tags highlights staticfiles %}
 
-<p>
-  <h3>
-    {% if object.get_classname == 'posts' %}
-      <span class="glyphicon glyphicon-book"></span>
-    {% elif object.get_classname == 'projects' %}
-      <span class="glyphicon glyphicon-pencil"></span>
-    {% else %}
-      <span class="glyphicon glyphicon-info-sign"></span>
-    {% endif %}
-
-    <a href={% url object.get_classname|add:'_detail' object.slug %}>{{ object.title }}</a>
-  </h3>
-
-  <p><i>{{ object.published_on }}</i> by {{ object.author }}</p>
-
-  {% if object.tags.all %}<p>posted in 
-    {% get_tags object.tags.names "/contents/"|add:object.get_classname|add:"/tag/" %}
-  </p>{% endif %}
-
-  <p>{% if object.commit %}Commit: <a href="https://github.com/argaen/djangozone/tree/{{ object.commit }}" target=blank>{{ object.commit }}</a>{% endif %}</p>
-  <p>{% if object.branch %}Branch: <a href="https://github.com/argaen/djangozone/tree/{{ object.branch }}" target=blank>{{ object.branch }}</a>{% endif %}</p>
-</p>
 
 {% if list %}
   <div class="post-content">

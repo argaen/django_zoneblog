@@ -1,8 +1,6 @@
 {% load staticfiles %}
 
 {% block styles %}
-    <link type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <link type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap-tpls.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.10/d3.min.js"></script>
@@ -11,11 +9,11 @@
     <script type="text/javascript" src={% static "9n/js/app.js" %}></script>
 {% endblock %}
 
-<div class="container" ng-app="cartomap" style="display:block;">
+<div class="container" ng-app="cartomap" style="display:block;margin-top:40px;">
   <div class="row">
-    <div class="col-md-7">
-      <button class="btn btn-primary" ng-click="map.source = 'comarques'; stats.current_vots = 'Sí - Sí'">Comarques</button>
-      <button class="btn btn-primary" ng-click="map.source = 'municipis'; stats.current_vots = 'Sí - Sí'">Municipis</button>
+    <div class="col-md-7" style="padding-left:0;">
+      <a class="btn btn-primary" ng-click="map.source = 'comarques'; stats.current_vots = 'Sí - Sí'">Comarques</a>
+      <a class="btn btn-primary" ng-click="map.source = 'municipis'; stats.current_vots = 'Sí - Sí'">Municipis</a>
       <div map-canvas style="margin:30px 0;"></div>
     </div>
     <div class="col-md-5">

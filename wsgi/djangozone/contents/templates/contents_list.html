@@ -6,7 +6,7 @@
 {% if objects.title %}
   {{ objects.title }}
 {% else %}
-  Posts
+  Contents
 {% endif %}
 {% endblock %}
 
@@ -21,6 +21,7 @@
     {% if objects.paginator %}
       {% for object in objects %}
         <div class="col-md-11 post">
+          {% include 'contents_header.html' %}
           {% include 'contents_detail.html' with list="True" %}
         </div>
       {% endfor %}
@@ -32,6 +33,8 @@
     {% else %}
       {% with objects as object %}
         <div class="col-md-11 post">
+          <a href="/">Home</a> <i class="fa fa-arrow-right"></i> <a href="/{{object.get_classname}}"> {{object.get_classname|capfirst }}</a> <i class="fa fa-arrow-right"></i> <a href={% url object.get_classname|add:'_detail' object.slug %}>{{object.title}}</a>
+          {% include 'contents_header.html' %}
           {% if object.template %}
             {% include object.get_classname|add:"/"|add:object.template %}
           {% else %}

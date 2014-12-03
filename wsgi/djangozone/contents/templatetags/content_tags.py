@@ -27,6 +27,6 @@ def get_latest_contents(num=5):
             key=attrgetter('published_on'), reverse=True)
     contents = ""
     for c in contents_list[:num]:
-        contents += "<h4><span class='glyphicon glyphicon-plus'></span> <a href=%s>%s</a></h4>" % (c.get_absolute_url(), c)
+        contents += "<li><i class='fa-li fa fa-angle-right'></i> <a href=%s>%s</a></li>" % (c.get_absolute_url(), c)
 
     return contents
