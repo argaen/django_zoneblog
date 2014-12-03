@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load content_tags staticfiles %}
+
+{% block base_template %}
+  <div class="container">
+    <div class="row">
+      {% block content %}
+        <div class="col-md-8" style="text-align:center;">
+          <h2><i class="fa fa-exclamation"></i> OPS, YOU'VE FOUND AND INVALID LINK</h2></br>
+          <h4>You can either stand up and dance with me or return to <a href="/">Home</a> page.</h4>
+          <img src={% static 'img/troll.gif' %}></img>
+        </div>
+      {% endblock content %}
+      {% block sidebar %}
+        {% include 'sidebar.html' %}
+      {% endblock %}
+    </div>
+  </div>
+{% endblock %}

@@ -33,6 +33,8 @@ else:
     ALLOWED_HOSTS = []
 
 TEMPLATE_DEBUG = True
+# DEBUG=False
+# ALLOWED_HOSTS = ['*']
 
 # Application definition
 
