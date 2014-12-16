@@ -2,7 +2,7 @@
 
 from setuptools import setup
 
-packages = ['Django>=1.7', 'django-taggit', 'pygments', 'beautifulsoup4']
+packages = ['Django>=1.7', 'django-taggit', 'pygments', 'beautifulsoup4', 'django-markdownx']
 
 setup(
     name='DjangoZone',

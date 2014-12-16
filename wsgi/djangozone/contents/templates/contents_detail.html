@@ -1,15 +1,15 @@
-{% load content_tags highlights staticfiles %}
+{% load content_tags highlights staticfiles markdownx %}
 
 
 {% if list %}
   <div class="post-content">
-    <p>{{ object.content|truncatechars_html:1000|highlight_code|safe }}</p>
+    <p>{{ object.content|truncatechars_html:1000|markdownify|highlight_code|safe }}</p>
   </div>
   <a class="btn btn-primary" href={% url object.get_classname|add:'_detail' object.slug %}>Read more</a>
 
 {% else %}
   <div class="post-content">
-    <p>{{ object.content|highlight_code|safe }}</p>
+    <p>{{ object.content|markdownify|highlight_code|safe }}</p>
   </div>
   {% if object.tags.similar_objects %}
     Similar: 

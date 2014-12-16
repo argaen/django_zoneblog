@@ -14,6 +14,7 @@ class Content(models.Model):
 
     slug = models.SlugField(max_length=200,blank=True)
 
+    keywords = models.CharField("Meta keywords", max_length=1000, help_text="A comma-separated list of keywords")
     tags = TaggableManager(blank=True)
 
     def __unicode__(self):    #Print object's title when printing the object
@@ -45,4 +46,3 @@ class Project(Content):
 
     def get_absolute_url(self):
         return "/projects/%s" % self.slug
-

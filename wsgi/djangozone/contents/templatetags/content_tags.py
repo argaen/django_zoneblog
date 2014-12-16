@@ -5,6 +5,7 @@ from operator import attrgetter
 from itertools import chain
 
 import os
+import markdown
 
 register = template.Library()
 
