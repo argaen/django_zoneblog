@@ -31,3 +31,7 @@ def get_latest_contents(num=5):
         contents += "<li><i class='fa-li fa fa-angle-right'></i> <a href=%s>%s</a></li>" % (c.get_absolute_url(), c)
 
     return contents
+
+@register.filter
+def markdownify(text):
+    return markdown.markdown(text)
