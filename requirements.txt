@@ -1,0 +1,4 @@
+django
+django-taggit
+beautifulsoup4
+pygments
