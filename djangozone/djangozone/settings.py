@@ -20,21 +20,9 @@ BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '-=(05tms9mg!c$++m82^k@td%c=%k!*pf4jj%=fse_%442!1g8'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-ON_OPENSHIFT = False
-if 'OPENSHIFT_REPO_DIR' in os.environ:
-    ON_OPENSHIFT = True
-
-if ON_OPENSHIFT:
-    DEBUG = False
-    ALLOWED_HOSTS = ['*']
-else:
-    DEBUG = True
-    ALLOWED_HOSTS = []
-
-TEMPLATE_DEBUG = True
-# DEBUG=False
-# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*']
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
 
 # Application definition
 
@@ -49,7 +37,6 @@ INSTALLED_APPS = (
     'taggit',
 
     'djzone_blog',
-    # 'common',
 
 )
 
@@ -67,26 +54,12 @@ ROOT_URLCONF = 'djangozone.urls'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-if ON_OPENSHIFT:
-    url = urlparse.urlparse(os.environ.get('OPENSHIFT_POSTGRESQL_DB_URL'))
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.environ['OPENSHIFT_APP_NAME'],
-            'USER': url.username,
-            'PASSWORD': url.password,
-            'HOST': url.hostname,
-            'PORT': url.port,
-            }
-        }
-
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
