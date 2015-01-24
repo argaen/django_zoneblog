@@ -48,10 +48,9 @@ INSTALLED_APPS = (
 
     'taggit',
 
-    'contents',
-    'common',
+    'djzone_blog',
+    # 'common',
 
-    'markdownx',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -63,7 +62,7 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'djangozone.urls'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
@@ -108,10 +107,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, '../static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, '../media')
-
-MARKDOWNX_IMAGE_SIZE = {'size': (700, 700), 'quality': 100,}
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

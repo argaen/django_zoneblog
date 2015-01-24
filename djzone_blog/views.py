@@ -29,7 +29,7 @@ def contents_list(request, tag=None):
 
     data = {'objects': contents}
 
-    return render(request, 'contents_list.html', data)
+    return render(request, 'contents/contents_list.html', data)
 
 def posts_list(request, tag=None):
     if tag:
@@ -48,13 +48,13 @@ def posts_list(request, tag=None):
 
     data = {'objects': posts}
 
-    return render(request, 'contents_list.html', data)
+    return render(request, 'contents/contents_list.html', data)
 
 
 def posts_detail(request, slug):
     data = {'objects': get_object_or_404(Post, slug=slug)}
 
-    return render(request, 'contents_list.html', data)
+    return render(request, 'contents/contents_list.html', data)
 
 
 def news_list(request, tag=None):
@@ -74,13 +74,13 @@ def news_list(request, tag=None):
 
     data = {'objects': news}
 
-    return render(request, 'contents_list.html', data)
+    return render(request, 'contents/contents_list.html', data)
 
 
 def news_detail(request, slug):
     data = {'objects': get_object_or_404(NewsItem, slug=slug)}
 
-    return render(request, 'contents_list.html', data)
+    return render(request, 'contents/contents_list.html', data)
 
 
 def projects_list(request, tag=None):
@@ -101,10 +101,14 @@ def projects_list(request, tag=None):
 
     data = {'objects': projects}
 
-    return render(request, 'contents_list.html', data)
+    return render(request, 'contents/contents_list.html', data)
 
 
 def projects_detail(request, slug):
     data = {'objects': get_object_or_404(Project, slug=slug)}
 
-    return render(request, 'contents_list.html', data)
+    return render(request, 'contents/contents_list.html', data)
+
+
+def about(request):
+    return render(request, 'about.html', {})

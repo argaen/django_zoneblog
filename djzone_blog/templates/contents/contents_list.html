@@ -21,8 +21,8 @@
     {% if objects.paginator %}
       {% for object in objects %}
         <div class="col-md-11 post">
-          {% include 'contents_header.html' %}
-          {% include 'contents_detail.html' with list="True" %}
+          {% include 'contents/contents_header.html' %}
+          {% include 'contents/contents_detail.html' with list="True" %}
         </div>
       {% endfor %}
       <div class="paginator col-md-11" style="margin-bottom:20px;">
@@ -34,13 +34,13 @@
       {% with objects as object %}
         <div class="col-md-11 post">
           <a href="/">Home</a> <i class="fa fa-arrow-right"></i> <a href="/{{object.get_classname}}"> {{object.get_classname|capfirst }}</a> <i class="fa fa-arrow-right"></i> <a href={% url object.get_classname|add:'_detail' object.slug %}>{{object.title}}</a>
-          {% include 'contents_header.html' %}
+          {% include 'contents/contents_header.html' %}
           {% if object.template %}
             {% include object.get_classname|add:"/"|add:object.template %}
           {% else %}
-            {% include 'contents_detail.html' %}
+            {% include 'contents/contents_detail.html' %}
           {% endif %}
-          {% include 'disqus_comments.html' %}
+          {% include 'contents/disqus_comments.html' %}
         </div>
       {% endwith %}
     {% endif %}

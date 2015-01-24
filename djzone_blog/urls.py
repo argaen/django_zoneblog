@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView
 
 urlpatterns = patterns(
-    'contents.views',
+    'djzone_blog.views',
     url(r'^posts/$', 'posts_list', name='posts_list'),
     url(r'^posts/tag/(?P<tag>\w+)$', 'posts_list', name='posts_tags'),
     url(r'^posts/(?P<slug>[\w-]+)$', 'posts_detail', name='posts_detail'),
@@ -14,6 +14,8 @@ urlpatterns = patterns(
     url(r'^projects/$', 'projects_list', name='projects_list'),
     url(r'^projects/tag/(?P<tag>\w+)$', 'projects_list', name='projects_list'),
     url(r'^projects/(?P<slug>[\w-]+)$', 'projects_detail', name='projects_detail'),
+
+    url(r'^about/$', 'about', name='about'),
 )
 
 urlpatterns = urlpatterns + patterns('django.views.generic.simple',
