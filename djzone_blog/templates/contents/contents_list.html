@@ -1,6 +1,6 @@
 {% extends 'home.html' %}
 
-{% load content_tags staticfiles %}
+{% load staticfiles %}
 
 {% block title %}
 {% if objects.title %}
@@ -14,7 +14,7 @@
   <link rel="stylesheet" type="text/css" href={% static "css/pygments-colorful.css" %}>
 {% endblock styles %}
 
-{% block meta_keywords %}{% if not objects.paginator %}{% with objects as object %}{% get_tags object.tags.names %}{% endwith %}{% endif %}{% endblock meta_keywords %}
+{% block meta_keywords %}{% if not objects.paginator %}{% with objects as object %}{{ object.keywords }}{% endwith %}{% endif %}{% endblock meta_keywords %}
 
 {% block content %}
   <div class="col-md-8">
