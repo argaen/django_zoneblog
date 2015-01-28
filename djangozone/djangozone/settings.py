@@ -27,6 +27,8 @@ TEMPLATE_DEBUG = DEBUG
 # Application definition
 
 INSTALLED_APPS = (
+    'zone_admin',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
