@@ -8,6 +8,7 @@ from pygments.formatters.html import HtmlFormatter
 
 register = template.Library()
 
+
 @register.filter    # Register the function as a filter
 @stringfilter       # Filter expects a string as input
 def highlight_code(html):
@@ -25,7 +26,7 @@ def highlight_code(html):
                 formatter = HtmlFormatter()
                 code_hl = highlight(code, lexer, formatter)
                 pre.contents = [BeautifulSoup(code_hl)]
-                pre.name = 'code'
+                pre.name = 'precode'
 
             except:
                 raise
