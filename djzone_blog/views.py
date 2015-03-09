@@ -4,18 +4,19 @@ from itertools import chain
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from models import Post, NewsItem, Content, Project
+from models import Post, NewsItem, Project
+
 
 def contents_list(request, tag=None):
     if tag:
         contents = sorted(
-                    chain(Post.objects.filter(published=True, tags__name__in=[tag]),
-                        NewsItem.objects.filter(published=True, tags__name__in=[tag]),
-                        Project.objects.filter(published=True, tags_name__in=[tag])),
-                    key=attrgetter('published_on'), reverse=True)
+            chain(Post.objects.filter(is_published=True, tags__name__in=[tag]),
+                  NewsItem.objects.filter(is_published=True, tags__name__in=[tag]),
+                  Project.objects.filter(is_published=True, tags_name__in=[tag])),
+            key=attrgetter('published_on'), reverse=True)
     else:
         contents = sorted(
-            chain(Post.objects.filter(published=True), NewsItem.objects.filter(published=True), Project.objects.filter(published=True)),
+            chain(Post.objects.filter(is_published=True), NewsItem.objects.filter(is_published=True), Project.objects.filter(is_published=True)),
             key=attrgetter('published_on'), reverse=True)
     paginator = Paginator(contents, 5)
 
@@ -31,11 +32,12 @@ def contents_list(request, tag=None):
 
     return render(request, 'contents/contents_list.html', data)
 
+
 def posts_list(request, tag=None):
     if tag:
-        posts = Post.objects.filter(published=True, tags__name__in=[tag])
+        posts = Post.objects.filter(is_published=True, tags__name__in=[tag])
     else:
-        posts = Post.objects.filter(published=True)
+        posts = Post.objects.filter(is_published=True)
     paginator = Paginator(posts, 5)
 
     page = request.GET.get('page')
@@ -59,9 +61,9 @@ def posts_detail(request, slug):
 
 def news_list(request, tag=None):
     if tag:
-        news = NewsItem.objects.filter(published=True, tags__name_in=[tag])
+        news = NewsItem.objects.filter(is_published=True, tags__name_in=[tag])
     else:
-        news = NewsItem.objects.filter(published=True)
+        news = NewsItem.objects.filter(is_published=True)
     paginator = Paginator(news, 5)
 
     page = request.GET.get('page')
@@ -86,9 +88,9 @@ def news_detail(request, slug):
 def projects_list(request, tag=None):
 
     if tag:
-        projects = Project.objects.filter(published=True, tags__name__in=[tag])
+        projects = Project.objects.filter(is_published=True, tags__name__in=[tag])
     else:
-        projects = Project.objects.filter(published=True)
+        projects = Project.objects.filter(is_published=True)
     paginator = Paginator(projects, 5)
 
     page = request.GET.get('page')
