@@ -1,5 +1,5 @@
 from django import template
-from djzone_blog.models import Content, Post, NewsItem, Project
+from zone_blog.models import Content, Post, NewsItem, Project
 
 from operator import attrgetter
 from itertools import chain

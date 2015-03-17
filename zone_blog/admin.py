@@ -18,6 +18,7 @@ class ContentForm(forms.ModelForm):
         widgets = {
             'tags': CustomTagWidget(attrs={'data-role': 'tagsinput'}),
         }
+        exclude = []
 
 
 class ContentAdmin(admin.ModelAdmin):

@@ -30,14 +30,19 @@ INSTALLED_APPS = (
 
     'django.contrib.admin',
     'django.contrib.auth',
+
+    'polymorphic',
     'django.contrib.contenttypes',
+
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
     'taggit',
+    'filer',
+    'easy_thumbnails',
 
-    'djzone_blog',
+    'zone_blog',
 
 )
 

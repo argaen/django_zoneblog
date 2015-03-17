@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView
 
 urlpatterns = patterns(
-    'djzone_blog.views',
+    'zone_blog.views',
     url(r'^posts/$', 'posts_list', name='posts_list'),
     url(r'^posts/tag/(?P<tag>\w+)$', 'posts_list', name='posts_tags'),
     url(r'^posts/(?P<slug>[\w-]+)$', 'posts_detail', name='posts_detail'),
