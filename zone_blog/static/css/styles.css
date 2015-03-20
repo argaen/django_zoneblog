@@ -8,11 +8,6 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-pre, code{
-  background-color: #272822;
-  color: #f8f8f2;
-}
-
 precode {
   background:color: #F0FDFF;
 }
@@ -160,4 +155,29 @@ a:hover {
 }
 .bs-callout-info h4 {
   color: #5bc0de;
+}
+
+pre, code{
+  background-color: #272822;
+  color: #f8f8f2;
+  font-size: 100%;
+  border: none;
+}
+
+.preh>.highlight>pre {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+preh {
+  display: block;
+  background-color: #ACC7A6;
+  color: #000;
+  padding: 5px 9.5px;
+  margin: 0px 15px;
+  margin-bottom: -16px;
+  border-radius: 4px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border: none;
 }
