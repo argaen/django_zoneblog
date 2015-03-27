@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 import datetime
 
@@ -7,32 +8,31 @@ from taggit.managers import TaggableManager
 
 
 class Content(models.Model):
-    title = models.CharField(max_length=200, unique=True)
-    published_on = models.DateField(default=datetime.date.today)
-    is_published = models.BooleanField(default=False)
-    author = models.ForeignKey(User)
-    content = models.TextField()
+    title = models.CharField(_("Title"), max_length=200, unique=True)
+    slug = models.SlugField(_("Slug"), max_length=200, blank=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("Author"))
+    content = models.TextField(_("Content"))
 
-    slug = models.SlugField(max_length=200, blank=True)
+    published_on = models.DateField(_("Published on"), default=datetime.date.today)
+    is_published = models.BooleanField(_("Is published"), default=False)
 
-    keywords = models.CharField("Meta keywords", max_length=1000, help_text="A comma-separated list of keywords")
+    keywords = models.CharField(_("Meta keywords"), max_length=1000, help_text="A comma-separated list of keywords")
     tags = TaggableManager(blank=True)
 
-    def __unicode__(self):    # Print object's title when printing the object
+    views = models.IntegerField(_("Views"), editable=False, default=0)
+
+    def __str__(self):
         return self.title
 
     def get_classname(self):
         return self.__class__.__name__.lower() + 's'
 
-    class Meta:     # Order by published_on field (newest first)
+    class Meta:
         ordering = ["-published_on", ]
         abstract = True
 
 
 class Post(Content):
-    commit = models.CharField(max_length=30, blank=True, null=True)
-    branch = models.URLField(max_length=150, blank=True, null=True)
-
     def get_absolute_url(self):
         return "/posts/%s" % self.slug
 
@@ -43,7 +43,7 @@ class NewsItem(Content):
 
 
 class Project(Content):
-    template = models.CharField(max_length=200, blank=True, null=True)
+    template = models.CharField(_("Template"), max_length=200, blank=True, null=True)
 
     def get_absolute_url(self):
         return "/projects/%s" % self.slug

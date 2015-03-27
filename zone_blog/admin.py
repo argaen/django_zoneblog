@@ -16,7 +16,7 @@ class ContentForm(forms.ModelForm):
     class Meta:
         model = models.Content
         widgets = {
-            'tags': CustomTagWidget(attrs={'data-role': 'tagsinput'}),
+            'tags': CustomTagWidget(attrs={'data-role': 'tags'}),
         }
         exclude = []
 
@@ -25,8 +25,7 @@ class ContentAdmin(admin.ModelAdmin):
 
     form = ContentForm
     prepopulated_fields = {'slug': ('title',)}
-    list_display = ('title', 'published_on', 'is_published')
-    list_filter = ('tags',)
+    list_display = ('title', 'author', 'published_on', 'is_published')
 
 
 admin.site.register(models.Post, ContentAdmin)

@@ -1,0 +1,4 @@
+include MANIFEST.in
+recursive-include zone_blog/templates *
+recursive-include zone_blog/templatetags *
+recursive-include zone_blog/static *
