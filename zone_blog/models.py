@@ -9,7 +9,7 @@ from taggit.managers import TaggableManager
 
 class Content(models.Model):
     title = models.CharField(_("Title"), max_length=200, unique=True)
-    slug = models.SlugField(_("Slug"), max_length=200, blank=True)
+    slug = models.SlugField(_("Slug"), max_length=200, unique=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("Author"))
     content = models.TextField(_("Content"))
 
