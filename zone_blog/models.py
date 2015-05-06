@@ -12,6 +12,7 @@ class Content(models.Model):
     slug = models.SlugField(_("Slug"), max_length=200, unique=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("Author"))
     content = models.TextField(_("Content"))
+    photo = models.ImageField(_("Picture"), upload_to="img/posts/", blank=True, null=True)
 
     published_on = models.DateField(_("Published on"), default=datetime.date.today)
     is_published = models.BooleanField(_("Is published"), default=False)
