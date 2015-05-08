@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 SECRET_KEY = '-=(05tms9mg!c$++m82^k@td%c=%k!*pf4jj%=fse_%442!1g8'
 
 ALLOWED_HOSTS = ['*']
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 # Application definition

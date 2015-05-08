@@ -1,5 +1,5 @@
 from django import template
-from zone_blog.models import Content, Post, NewsItem, Project
+from zone_blog.models import Post, NewsItem, Project
 
 from operator import attrgetter
 from itertools import chain
@@ -14,7 +14,7 @@ register = template.Library()
 def get_tags(tags, url=None):
     ret_tags = []
     for tag in tags:
-        head = "<a href=%s>#" % os.path.join(url, tag) if url else ''
+        head = "<a href=/%s>#" % os.path.join(url, tag) if url else ''
         tail = "</a>" if url else ''
         ret_tags.append(head + str(tag) + tail)
     return ', '.join(ret_tags)
@@ -32,6 +32,7 @@ def get_latest_contents(num=5):
         contents += "<li><i class='fa-li fa fa-angle-right'></i> <a href=%s>%s</a></li>" % (c.get_absolute_url(), c)
 
     return contents
+
 
 @register.filter
 def markdownify(text):

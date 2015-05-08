@@ -6,6 +6,9 @@ body {
   margin-bottom: 60px;
   background-color: #F0FDFF;
   font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  color: #666;
+  letter-spacing: 0.2px;
 }
 
 precode {
@@ -43,10 +46,6 @@ h1, h2, h3 {
 
 .post li {
   margin-bottom: 10px;
-}
-
-pre {
-  margin: 15px;
 }
 
 a {
@@ -157,11 +156,18 @@ a:hover {
   color: #5bc0de;
 }
 
-pre, code{
-  background-color: #272822;
+code {
+  background-color: #ACC7A6;
+  color: #444;
+}
+pre {
   color: #f8f8f2;
-  font-size: 100%;
   border: none;
+}
+pre {
+  background-color: #272822;
+  margin: 15px;
+  font-size: 14px;
 }
 
 .preh>.highlight>pre {

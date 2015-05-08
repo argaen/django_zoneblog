@@ -16,7 +16,7 @@
   <p><i>{{ object.published_on }}</i> by {{ object.author }}</p>
 
   {% if object.tags.all %}<p>posted in 
-    {% get_tags object.tags.names "/contents/"|add:object.get_classname|add:"/tag/" %}
+    {% get_tags object.tags.names object.get_classname|add:"/tag/" %}
   </p>{% endif %}
 
   <p>{% if object.commit %}Commit: <a href="https://github.com/argaen/djangozone/tree/{{ object.commit }}" target=blank>{{ object.commit }}</a>{% endif %}</p>
