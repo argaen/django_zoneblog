@@ -53,5 +53,4 @@ class ContentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.Post, ContentAdmin)
-admin.site.register(models.NewsItem, ContentAdmin)
 admin.site.register(models.Project, ContentAdmin)

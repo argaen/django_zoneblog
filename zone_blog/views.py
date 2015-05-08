@@ -1,116 +1,29 @@
-from operator import attrgetter
-from itertools import chain
-
-from django.shortcuts import render, get_object_or_404
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-from models import Post, NewsItem, Project
+from django.views.generic import DetailView
+from django.views.generic.dates import ArchiveIndexView
 
 
-def contents_list(request, tag=None):
-    if tag:
-        contents = sorted(
-            chain(Post.objects.filter(is_published=True, tags__name__in=[tag]),
-                  NewsItem.objects.filter(is_published=True, tags__name__in=[tag]),
-                  Project.objects.filter(is_published=True, tags_name__in=[tag])),
-            key=attrgetter('published_on'), reverse=True)
-    else:
-        contents = sorted(
-            chain(Post.objects.filter(is_published=True), NewsItem.objects.filter(is_published=True), Project.objects.filter(is_published=True)),
-            key=attrgetter('published_on'), reverse=True)
-    paginator = Paginator(contents, 5)
-
-    page = request.GET.get('page')
-    try:
-        contents = paginator.page(page)
-    except PageNotAnInteger:
-        contents = paginator.page(1)
-    except EmptyPage:
-        contents = paginator.page(paginator.num_pages)
-
-    data = {'objects': contents}
-
-    return render(request, 'contents/contents_list.html', data)
+from models import Post, Project
 
 
-def posts_list(request, tag=None):
-    if tag:
-        posts = Post.objects.filter(is_published=True, tags__name__in=[tag])
-    else:
-        posts = Post.objects.filter(is_published=True)
-    paginator = Paginator(posts, 5)
-
-    page = request.GET.get('page')
-    try:
-        posts = paginator.page(page)
-    except PageNotAnInteger:
-        posts = paginator.page(1)
-    except EmptyPage:
-        posts = paginator.page(paginator.num_pages)
-
-    data = {'objects': posts}
-
-    return render(request, 'contents/contents_list.html', data)
+class PostListView(ArchiveIndexView):
+    context_object_name = 'objects'
+    template_name = 'content_list.html'
+    queryset = Post.objects.filter(is_published=True)
+    paginate_by = 4
+    date_field = 'published_on'
 
 
-def posts_detail(request, slug):
-    data = {'objects': get_object_or_404(Post, slug=slug)}
+class PostDetailView(DetailView):
 
-    return render(request, 'contents/contents_list.html', data)
-
-
-def news_list(request, tag=None):
-    if tag:
-        news = NewsItem.objects.filter(is_published=True, tags__name_in=[tag])
-    else:
-        news = NewsItem.objects.filter(is_published=True)
-    paginator = Paginator(news, 5)
-
-    page = request.GET.get('page')
-    try:
-        news = paginator.page(page)
-    except PageNotAnInteger:
-        news = paginator.page(1)
-    except EmptyPage:
-        news = paginator.page(paginator.num_pages)
-
-    data = {'objects': news}
-
-    return render(request, 'contents/contents_list.html', data)
+    context_object_name = 'o'
+    slug_field = 'slug'
+    template_name = 'content_detail.html'
+    queryset = Post.objects.filter(is_published=True)
 
 
-def news_detail(request, slug):
-    data = {'objects': get_object_or_404(NewsItem, slug=slug)}
-
-    return render(request, 'contents/contents_list.html', data)
-
-
-def projects_list(request, tag=None):
-
-    if tag:
-        projects = Project.objects.filter(is_published=True, tags__name__in=[tag])
-    else:
-        projects = Project.objects.filter(is_published=True)
-    paginator = Paginator(projects, 5)
-
-    page = request.GET.get('page')
-    try:
-        projects = paginator.page(page)
-    except PageNotAnInteger:
-        projects = paginator.page(1)
-    except EmptyPage:
-        projects = paginator.page(paginator.num_pages)
-
-    data = {'objects': projects}
-
-    return render(request, 'contents/contents_list.html', data)
-
-
-def projects_detail(request, slug):
-    data = {'objects': get_object_or_404(Project, slug=slug)}
-
-    return render(request, 'contents/contents_list.html', data)
-
-
-def about(request):
-    return render(request, 'about.html', {})
+class ProjectListView(ArchiveIndexView):
+    context_object_name = 'objects'
+    template_name = 'contents_list.html'
+    queryset = Project.objects.filter(is_published=True)
+    paginate_by = 4
+    date_field = 'published_on'

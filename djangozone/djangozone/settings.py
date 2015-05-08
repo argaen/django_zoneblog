@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 SECRET_KEY = '-=(05tms9mg!c$++m82^k@td%c=%k!*pf4jj%=fse_%442!1g8'
 
 ALLOWED_HOSTS = ['*']
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 # Application definition
@@ -31,17 +31,14 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
 
-    'polymorphic',
     'django.contrib.contenttypes',
-
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
     'debug_toolbar',
     'taggit',
-    'filer',
-    'easy_thumbnails',
+    'versatileimagefield',
 
     'zone_blog',
 

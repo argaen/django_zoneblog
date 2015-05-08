@@ -1,0 +1,169 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content={% block meta_description %}"Find everything you want to know here in DjangoZone!"{% endblock %}>
+    <meta name="author" content="Manuel Miranda">
+    <meta name="keywords" content="{% block meta_keywords %}django project, djangoproject, django tutorials, django examples, django blog{% endblock %}">
+    <link rel="shortcut icon" type="image/png" href={% static "img/logos/djangozone.png" %}>
+
+    <title>{% block title %}Django Zone{% endblock title %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/theme.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap-reset.css' %}" rel="stylesheet">
+    <!-- <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">-->
+
+    <!--external css-->
+    <link href="{% static 'assets/font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/flexslider.css' %}"/>
+    <link href="{% static 'assets/bxslider/jquery.bxslider.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/owlcarousel/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/owlcarousel/owl.theme.css' %}">
+
+    <link href="{% static 'css/superfish.css' %}" rel="stylesheet" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'> -->
+
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/component.css' %}">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style-responsive.css' %}" rel="stylesheet" />
+    {% block styles %}
+    {% endblock styles %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/parallax-slider/parallax-slider.css' %}" />
+    <script type="text/javascript" src="{% static 'js/parallax-slider/modernizr.custom.28468.js' %}">
+    </script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+    <script src="{% static 'js/html5shiv.js' %}">
+    </script>
+    <script src="{% static 'js/respond.min.js' %}">
+    </script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <!--header start-->
+    <header class="head-section">
+    <div class="navbar navbar-default navbar-static-top container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{% url 'home' %}"><span>D</span>jango<span>Z</span>one</span></a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li> <a href="{% url 'home' %}">Home </a> </li>
+        <li> <a href="{% url 'about' %}">About</a> </li>
+        <li><input class="form-control search" placeholder=" Search" type="text"></li>
+      </ul>
+    </div>
+    </header>
+    <!--header end-->
+
+    {% block content %}
+    {% endblock %}
+
+    <!--small footer start -->
+    <footer class="footer-small">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-sm-6 pull-right">
+            <ul class="social-link-footer list-unstyled">
+              <li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".4s"><a target="_blank" href="https://www.linkedin.com/profile/view?id=156606310&trk=nav_responsive_tab_profile_pic"><i class="fa fa-linkedin"></i></a></li>
+              <li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".5s"><a target="_blank" href="https://twitter.com/blckdt"><i class="fa fa-twitter"></i></a></li>
+              <li class="wow flipInX" data-wow-duration="2s" data-wow-delay=".7s"><a target="_blank" href="https://github.com/argaen"><i class="fa fa-github"></i></a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <div class="copyright">
+              <p>&copy; Django Zone. Original theme from <a href="http://shapebootstrap.net/item/acme-free-responsive-corporate-template/">shapebootstrap</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!--small footer end-->
+
+    <!-- js placed at the end of the document so the pages load faster
+    <script src="{% static 'js/jquery.js' %}">
+    </script>
+    -->
+    <script src="{% static 'js/jquery-1.8.3.min.js' %}"> </script>
+    <script src="{% static 'js/bootstrap.min.js' %}"> </script>
+    <script type="text/javascript" src="{% static 'js/hover-dropdown.js' %}"> </script>
+    <script defer src="{% static 'js/jquery.flexslider.js' %}"> </script>
+    <script type="text/javascript" src="{% static 'assets/bxslider/jquery.bxslider.js' %}"> </script>
+
+    <script type="text/javascript" src="{% static 'js/jquery.parallax-1.1.3.js' %}"> </script>
+    <script src="{% static 'js/wow.min.js' %}"> </script>
+    <script src="{% static 'assets/owlcarousel/owl.carousel.js' %}"> </script>
+
+    <script src="{% static 'js/jquery.easing.min.js' %}"> </script>
+    <script src="{% static 'js/link-hover.js' %}"> </script>
+    <script src="{% static 'js/superfish.js' %}"> </script>
+    <script type="text/javascript" src="{% static 'js/parallax-slider/jquery.cslider.js' %}"> </script>
+
+    <!--common script for all pages-->
+    <script src="{% static 'js/common-scripts.js' %}"> </script>
+
+    <script type="text/javascript">
+      jQuery(document).ready(function() {
+        $('.bxslider1').bxSlider({
+          minSlides: 5,
+          maxSlides: 6,
+          slideWidth: 360,
+          slideMargin: 2,
+          moveSlides: 1,
+          responsive: true,
+          nextSelector: '#slider-next',
+          prevSelector: '#slider-prev',
+          nextText: 'Onward →',
+          prevText: '← Go back'
+        });
+      });
+    </script>
+
+
+    <script>
+      $('a.info').tooltip();
+
+      $(window).load(function() {
+        $('.flexslider').flexslider({
+          animation: "slide",
+          start: function(slider) {
+            $('body').removeClass('loading');
+          }
+        });
+      });
+
+      $(document).ready(function() {
+
+        $("#owl-demo").owlCarousel({
+          items : 4
+        });
+
+      });
+
+      jQuery(document).ready(function(){
+        jQuery('ul.superfish').superfish();
+      });
+
+      new WOW().init();
+
+
+    </script>
+  </body>
+</html>

@@ -2,9 +2,11 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 
+
 import datetime
 
 from taggit.managers import TaggableManager
+from versatileimagefield.fields import VersatileImageField
 
 
 class Content(models.Model):
@@ -12,7 +14,7 @@ class Content(models.Model):
     slug = models.SlugField(_("Slug"), max_length=200, unique=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("Author"))
     content = models.TextField(_("Content"))
-    photo = models.ImageField(_("Picture"), upload_to="img/posts/", blank=True, null=True)
+    photo = VersatileImageField(_("Picture"), upload_to="img/posts/", blank=True, null=True)
 
     published_on = models.DateField(_("Published on"), default=datetime.date.today)
     is_published = models.BooleanField(_("Is published"), default=False)
@@ -34,17 +36,8 @@ class Content(models.Model):
 
 
 class Post(Content):
-    def get_absolute_url(self):
-        return "/posts/%s" % self.slug
-
-
-class NewsItem(Content):
-    def get_absolute_url(self):
-        return "/news/%s" % self.slug
+    pass
 
 
 class Project(Content):
     template = models.CharField(_("Template"), max_length=200, blank=True, null=True)
-
-    def get_absolute_url(self):
-        return "/projects/%s" % self.slug

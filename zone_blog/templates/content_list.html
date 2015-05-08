@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% load content_tags %}
+
+{% block content %}
+
+{% block breadcrumbs %}
+  <div class="breadcrumbs">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-sm-4">
+          <h1>Blog</h1>
+        </div>
+        <div class="col-lg-8 col-sm-8">
+          <ol class="breadcrumb pull-right">
+            <li><a href="{% url 'home' %}">Home</a></li>
+          </ol> 
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+<div class="container">
+  <div class="row">
+    <!--blog start-->
+
+    {% block blog_content %}
+      <div class="col-lg-9 ">
+        {% for o in objects %}
+          <div class="blog-item">
+            <div class="row">
+
+              <div class="col-lg-2 col-sm-2">
+                <div class="date-wrap">
+                  <span class="date"> {{o.published_on|date:"d"}} </span>
+                  <span class="month"> {{o.published_on|date:"M"}} {{o.published_on|date:"Y"}}</span>
+                </div>
+              </div>
+
+              {% if o.photo %}
+                <div class="col-lg-10 col-sm-10">
+                  <div class="blog-img">
+                    <img src="{{o.photo.url}}" alt=""/>
+                  </div>
+                </div>
+              {% endif %}
+
+              <div class="col-lg-10 col-sm-10 pull-right">
+                <h1><a href="{% url 'post-detail' o.slug %}">{{o.title}}</a></h1>
+                {% if o.photo %}
+                  <p>{{o.content|markdownify|safe|truncatechars_html:350}}</p>
+                {% else %}
+                  <p>{{o.content|markdownify|safe|truncatechars_html:750}}</p>
+                {% endif %}
+                <a href="blog-detail.html" class="btn btn-primary"> Continue Reading </a>
+              </div>
+
+              <div class="col-lg-2 col-sm-2 text-right">
+                  <div class="author"> By {{o.author}} </div>
+                  <ul class="list-unstyled">
+                    {% for t in o.tags.all %}
+                      <li><a href="javascript:;"><em> {{t}} </em></a></li>
+                    {% endfor %}
+                  </ul>
+                  <div class="st-view">
+                    <ul class="list-unstyled">
+                      <li><a href="javascript:;"> 209 View </a></li>
+                      <li><a href="javascript:;"> 23 Share </a></li>
+                      <li><a href="javascript:;"> 15 comments </a></li>
+                    </ul>
+                  </div>
+              </div>
+
+            </div>
+          </div>
+        {% endfor %}
+        <div class="text-center">
+          <ul class="pagination">
+            {% for page in paginator.page_range %}
+              <li class="{%ifequal page page_obj.number%}active{%endifequal%}"><a href="{% url 'post-list' %}?page={{page}}">{{page}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+
+      </div>
+    {% endblock blog_content %}
+
+
+    {% block sidebar %}
+      <div class="col-lg-3">
+        <div class="blog-side-item">
+          <div class="search-row">
+            <input type="text" class="form-control" placeholder="Search here">
+          </div>
+          <div class="category">
+            <h3>Categories</h3>
+            <ul class="list-unstyled">
+              {% get_tags as tags %}
+              {% for t in tags %}
+                <li><a href="javascript:;"><i class="fa fa-angle-right pr-10"></i>{{t}}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <div class="blog-post">
+            <h3>Latest Publications</h3>
+            {% for o in objects|slice:":3" %}
+              <div class="media">
+                {% if o.photo %}
+                  <a class="pull-left" href="{% url 'post-detail' o.slug %}">
+                    <img class="img-responsive" src="{{o.photo.thumbnail.81x81}}" alt="">
+                  </a>
+                {% endif %}
+                <div class="media-body">
+                  <h5 class="media-heading">
+                    <p>{{o.published_on}}</p>
+                  </h5>
+                  <a href="{% url 'post-detail' o.slug %}">{{o.title}}</a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          <!-- <div class="archive"> -->
+          <!--   <h3>Archive</h3> -->
+          <!--   <ul class="list-unstyled"> -->
+          <!--     <li><a href="javascript:;"><i class="fa fa-angle-double-right pr-10"></i>May 2014</a></li> -->
+          <!--     <li><a href="javascript:;"><i class="fa fa-angle-double-right pr-10"></i>April 2014</a></li> -->
+          <!--   </ul> -->
+          <!-- </div> -->
+
+        </div>
+      </div>
+    {% endblock sidebar %}
+    </div>
+    <!--blog end-->
+  </div>
+
+</div>
+
+{% endblock content %}

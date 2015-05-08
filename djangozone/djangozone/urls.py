@@ -3,13 +3,14 @@ from django.conf import settings
 
 from django.contrib import admin
 
+from zone_blog import views as blog_views
+
 urlpatterns = patterns(
     '',
-    url(r'^$', 'zone_blog.views.contents_list', name='contents_list'),
-    url(r'^zone_blog/', include('zone_blog.urls')),
+    url(r'^$', blog_views.PostListView.as_view(), name='home'),
+    url(r'^blog/', include('zone_blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'', include('zone_blog.urls')),
     # url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
 )
 
