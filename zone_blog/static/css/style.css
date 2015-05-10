@@ -2971,3 +2971,32 @@ div.header h3{
     left:50%;
     top:-4px;
 }
+
+#disqus_thread {
+  color: #797979;
+  padding: 5px;
+}
+#disqus_thread a {
+  color: #48cfad;
+}
+#share-buttons img {
+  width: 35px;
+  padding: 5px;
+  border: 0;
+  box-shadow: 0;
+  display: inline;
+}
+
+span.at4-icon.aticon-twitter {
+  background: url('/static/img/twitter.png') no-repeat left;
+}
+span.at4-icon.aticon-google_plusone_share {
+  background: url('/static/img/google.png') no-repeat left;
+}
+span.at4-icon.aticon-linkedin {
+  background: url('/static/img/linkedin.png') no-repeat left;
+}
+
+.addthis_sharing_toolbox a.at-svc-twitter, .addthis_sharing_toolbox a.at-svc-linkedin, .addthis_sharing_toolbox a.at-svc-google_plusone_share {
+  background-color: #fff;
+}

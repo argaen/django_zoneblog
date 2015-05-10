@@ -2,67 +2,81 @@
 
 {% load content_tags %}
 
-  {% block breadcrumbs %}
-    <div class="breadcrumbs">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 col-sm-4">
-            <h1>Blog</h1>
-          </div>
-          <div class="col-lg-8 col-sm-8">
-            <ol class="breadcrumb pull-right">
-              <li><a href="{% url 'home' %}">Home</a></li>
-              <li><a href="{% url 'post-list' %}">Blog</a></li>
-              <li><a href="{% url 'post-detail' o.slug %}">{{o.title}}</a></li>
-            </ol> 
-          </div>
+{% block title %}{{o.title}}{% endblock title %}
+
+{% block breadcrumbs %}
+  <div class="breadcrumbs">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-sm-4">
+          <h1>Blog</h1>
+        </div>
+        <div class="col-lg-8 col-sm-8">
+          <ol class="breadcrumb pull-right">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'post-list' %}">Blog</a></li>
+            <li><a href="{% url 'post-detail' o.slug %}">{{o.title}}</a></li>
+          </ol> 
         </div>
       </div>
     </div>
-  {% endblock breadcrumbs %}
+  </div>
+{% endblock breadcrumbs %}
 
-  {% block blog_content %}
-    <!--blog start-->
-    <div class="col-lg-9">
-      <div class="blog-item">
-        <div class="row">
+{% block blog_content %}
+  <!--blog start-->
+  <div class="col-lg-9">
+    <div class="blog-item">
+      <div class="row">
 
-          <div class="col-lg-2 col-sm-2">
-            <div class="date-wrap">
-              <span class="date"> {{o.published_on|date:"d"}} </span>
-              <span class="month"> {{o.published_on|date:"M"}} {{o.published_on|date:"Y"}}</span>
-            </div>
+        <div class="col-lg-2 col-sm-2">
+          <div class="date-wrap">
+            <span class="date"> {{o.published_on|date:"d"}} </span>
+            <span class="month"> {{o.published_on|date:"M"}} {{o.published_on|date:"Y"}}</span>
           </div>
+          <div style="text-align:center;" class="addthis_sharing_toolbox" data-title="{{o.title}}"></div>
+        </div>
 
-          {% if o.photo %}
-          <div class="col-lg-10 col-sm-10">
-            <div class="blog-img">
-              <img src="{{o.photo.url}}" alt=""/>
-            </div>
+        {% if o.photo %}
+        <div class="col-lg-10 col-sm-10">
+          <div class="blog-img">
+            <img src="{{o.photo.url}}" alt=""/>
           </div>
-          {% endif %}
+        </div>
+        {% endif %}
 
-          <div class="col-lg-10 col-sm-10 pull-right">
-            <h1><a href="blog-detail.html">{{o.title}}</a></h1>
-            <p>{{o.content|markdownify|highlight_code|safe}}</p>
-          </div>
 
-          <div class="col-lg-2 col-sm-2 text-right">
-            <div class="author"> By {{o.author}} </div>
+        <div class="col-lg-10 col-sm-10 pull-right">
+          <h1><a href="blog-detail.html">{{o.title}}</a></h1>
+          <p>{{o.content|markdownify|highlight_code|safe}}</p>
+
+          <div id="disqus_thread" style="margin-top:20px;"></div>
+        </div>
+
+        <div class="col-lg-2 col-sm-2 text-right">
+          <div class="author"> By {{o.author}} </div>
+          <ul class="list-unstyled">
+            {% for t in o.tags.all %}
+            <li><a href="javascript:;"><em> {{t}} </em></a></li>
+            {% endfor %}
+          </ul>
+          <div class="st-view">
             <ul class="list-unstyled">
-              {% for t in o.tags.all %}
-              <li><a href="javascript:;"><em> {{t}} </em></a></li>
-              {% endfor %}
+              <li><a style="cursor:default;"> {{o.views}} Views </a></li>
+              <li><a style="cursor:default;"><span style="color: #48cfad;font-weight:normal;" id="atcounter">0</span> Shares </a></li>
+              <li><a style="cursor:default;"> 0 Comments</a></li>
             </ul>
-            <div class="st-view">
-              <ul class="list-unstyled">
-                <li><a href="javascript:;"> 209 View </a></li>
-                <li><a href="javascript:;"> 23 Share </a></li>
-                <li><a href="javascript:;"> 15 comments </a></li>
-              </ul>
-            </div>
           </div>
         </div>
       </div>
     </div>
-  {% endblock blog_content %}
+  </div>
+
+<script type="text/javascript">
+  $(function(){
+    addthis.sharecounters.getShareCounts({service: ['linkedin', 'twitter'], countUrl: "http://django.zone{% url 'post-detail' o.slug %}"}, function(obj) {
+      $("#atcounter").text(obj[0].count + obj[1].count);
+    });
+  });
+</script>
+{% endblock blog_content %}
