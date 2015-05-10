@@ -5,10 +5,13 @@ import views
 
 urlpatterns = patterns(
     '',
-    url(r'^$', views.PostListView.as_view(), name='post-list'),
-    url(r'^(?P<slug>[\w-]+)/$', views.PostDetailView.as_view(), name='post-detail'),
+    url(r'^posts$', views.PostListView.as_view(), name='post-list'),
+    url(r'^posts/(?P<slug>[\w-]+)/$', views.PostDetailView.as_view(), name='post-detail'),
 
-    url(r'^about/$', 'about', name='about'),
+    # url(r'^projects$', views.ProjectListView.as_view(), name='project-list'),
+    # url(r'^projects/(?P<slug>[\w-]+)/$', views.ProjectDetailView.as_view(), name='project-detail'),
+
+    # url(r'^about/$', 'views.about', name='about'),
 )
 
 urlpatterns = urlpatterns + patterns('django.views.generic.simple',

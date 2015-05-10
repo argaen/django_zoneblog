@@ -35,6 +35,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/component.css' %}">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <link href="{% static 'css/style-responsive.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/pygments-colorful.css' %}" rel="stylesheet" />
     {% block styles %}
     {% endblock styles %}
 
@@ -66,7 +67,6 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li> <a href="{% url 'home' %}">Home </a> </li>
-        <li> <a href="{% url 'about' %}">About</a> </li>
         <li><input class="form-control search" placeholder=" Search" type="text"></li>
       </ul>
     </div>

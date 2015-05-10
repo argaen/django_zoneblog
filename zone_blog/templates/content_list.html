@@ -49,11 +49,11 @@
               <div class="col-lg-10 col-sm-10 pull-right">
                 <h1><a href="{% url 'post-detail' o.slug %}">{{o.title}}</a></h1>
                 {% if o.photo %}
-                  <p>{{o.content|markdownify|safe|truncatechars_html:350}}</p>
+                  <p>{{o.content|markdownify|highlight_code|safe|truncatechars_html:350}}</p>
                 {% else %}
-                  <p>{{o.content|markdownify|safe|truncatechars_html:750}}</p>
+                  <p>{{o.content|markdownify|highlight_code|safe|truncatechars_html:750}}</p>
                 {% endif %}
-                <a href="blog-detail.html" class="btn btn-primary"> Continue Reading </a>
+                <a href="{% url 'post-detail' o.slug %}" class="btn btn-primary"> Continue Reading </a>
               </div>
 
               <div class="col-lg-2 col-sm-2 text-right">
@@ -105,22 +105,24 @@
 
           <div class="blog-post">
             <h3>Latest Publications</h3>
-            {% for o in objects|slice:":3" %}
+            {% get_latest_posts as posts %}
+            {% for p in posts %}
               <div class="media">
-                {% if o.photo %}
-                  <a class="pull-left" href="{% url 'post-detail' o.slug %}">
-                    <img class="img-responsive" src="{{o.photo.thumbnail.81x81}}" alt="">
+                {% if p.photo %}
+                  <a class="pull-left" href="{% url 'post-detail' p.slug %}">
+                    <img class="img-responsive" src="{{p.photo.thumbnail.81x81}}" alt="">
                   </a>
                 {% endif %}
                 <div class="media-body">
                   <h5 class="media-heading">
-                    <p>{{o.published_on}}</p>
+                    <p>{{p.published_on}}</p>
                   </h5>
-                  <a href="{% url 'post-detail' o.slug %}">{{o.title}}</a>
+                  <a href="{% url 'post-detail' p.slug %}">{{p.title}}</a>
                 </div>
               </div>
             {% endfor %}
           </div>
+
 
           <!-- <div class="archive"> -->
           <!--   <h3>Archive</h3> -->
