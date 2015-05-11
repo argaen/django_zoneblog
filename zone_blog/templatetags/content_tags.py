@@ -1,9 +1,11 @@
 from django import template
 
-from taggit.models import Tag
 from django import template
 from django.template.defaultfilters import stringfilter
+from django.contrib.contenttypes.models import ContentType
+from django.db.models import Count
 
+from taggit.models import Tag
 from bs4 import BeautifulSoup
 from pygments import highlight
 from pygments.lexers import get_lexer_by_name
@@ -17,8 +19,16 @@ register = template.Library()
 
 
 @register.assignment_tag
-def get_tags():
-    return Tag.objects.all()
+def get_tags(model=None):
+    if model:
+        tags = list(Tag.objects.all())
+        for t in tags:
+            t.num_items = t.taggit_taggeditem_items.filter(content_type__model=model).count()
+            if t.num_items == 0:
+                tags.remove(t)
+        return tags
+    else:
+        return Tag.objects.annotate(num_items=Count('taggit_taggeditem_items__content_type__model'))
 
 
 @register.filter
@@ -29,6 +39,7 @@ def markdownify(text):
 @register.assignment_tag
 def get_latest_posts():
     return Post.objects.filter(is_published=True)[:3]
+
 
 @register.assignment_tag
 def get_latest_projects():
