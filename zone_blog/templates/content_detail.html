@@ -62,9 +62,9 @@
           </ul>
           <div class="st-view">
             <ul class="list-unstyled">
-              <li><a style="cursor:default;"> {{o.views}} Views </a></li>
+              {#<li><a style="cursor:default;"> {{o.views}} Views </a></li>#}
               <li><a style="cursor:default;"><span style="color: #48cfad;font-weight:normal;" id="atcounter">0</span> Shares </a></li>
-              <li><a style="cursor:default;"> 0 Comments</a></li>
+              <li><a data-disqus-identifier="{{o.slug}}" style="cursor:default;"> 0 Comments</a></li>
             </ul>
           </div>
         </div>
@@ -78,5 +78,14 @@
       $("#atcounter").text(obj[0].count + obj[1].count);
     });
   });
+</script>
+
+<script type="text/javascript">
+  var disqus_shortname = 'djangozone';
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
 </script>
 {% endblock blog_content %}
