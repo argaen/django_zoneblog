@@ -12,6 +12,12 @@ class PostListView(ArchiveIndexView):
     paginate_by = 4
     date_field = 'published_on'
 
+    def get_queryset(self):
+        if "tag" in self.kwargs:
+            return super(PostListView, self).get_queryset().filter(tags__name__in=[self.kwargs["tag"]])
+        else:
+            return super(PostListView, self).get_queryset()
+
 
 class PostDetailView(DetailView):
 

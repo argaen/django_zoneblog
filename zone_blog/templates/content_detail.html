@@ -47,7 +47,7 @@
 
 
         <div class="col-lg-10 col-sm-10 pull-right">
-          <h1><a href="blog-detail.html">{{o.title}}</a></h1>
+          <h1><a>{{o.title}}</a></h1>
           <p>{{o.content|markdownify|highlight_code|safe}}</p>
 
           <div id="disqus_thread" style="margin-top:20px;"></div>
@@ -57,7 +57,7 @@
           <div class="author"> By {{o.author}} </div>
           <ul class="list-unstyled">
             {% for t in o.tags.all %}
-            <li><a href="javascript:;"><em> {{t}} </em></a></li>
+              <li><a href="{% url 'post-list-tag' t.name %}"><em> {{t}} </em></a></li>
             {% endfor %}
           </ul>
           <div class="st-view">

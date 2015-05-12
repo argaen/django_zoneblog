@@ -6,6 +6,7 @@ import views
 urlpatterns = patterns(
     '',
     url(r'^posts$', views.PostListView.as_view(), name='post-list'),
+    url(r'^posts/tag/(?P<tag>[\ \w-]+)/$', views.PostListView.as_view(), name='post-list-tag'),
     url(r'^posts/(?P<slug>[\w-]+)/$', views.PostDetailView.as_view(), name='post-detail'),
 
     # url(r'^projects$', views.ProjectListView.as_view(), name='project-list'),

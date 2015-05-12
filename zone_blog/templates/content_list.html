@@ -36,7 +36,7 @@
                   <span class="date"> {{o.published_on|date:"d"}} </span>
                   <span class="month"> {{o.published_on|date:"M"}} {{o.published_on|date:"Y"}}</span>
                 </div>
-                <div style="text-align:center;" class="addthis_sharing_toolbox" data-url="{% url 'post-detail' o.pk %}" data-title="{{o.title}}"></div>
+                <div style="text-align:center;" class="addthis_sharing_toolbox" data-title="{{o.title}}" data-url="http://django.zone{% url 'post-detail' o.slug %}"></div>
               </div>
 
               {% if o.photo %}
@@ -61,7 +61,7 @@
                 <div class="author"> By {{o.author}} </div>
                 <ul class="list-unstyled">
                   {% for t in o.tags.all %}
-                    <li><a href="javascript:;"><em> {{t}} </em></a></li>
+                    <li><a href="{% url 'post-list-tag' t.name %}"><em> {{t}} </em></a></li>
                   {% endfor %}
                 </ul>
                 <div class="st-view">
@@ -105,9 +105,9 @@
           <div class="category">
             <h3>Categories</h3>
             <ul class="list-unstyled">
-              {% get_tags as tags %}
+              {% get_tags 'post' as tags %}
               {% for t in tags %}
-                <li><a href="javascript:;"><i class="fa fa-angle-right pr-10"></i>{{t}}</a></li>
+                <li><a href="{% url 'post-list-tag' t.name %}"><i class="fa fa-angle-right pr-10"></i>{{t}} ({{t.num_items}})</a></li>
               {% endfor %}
             </ul>
           </div>
