@@ -1,6 +1,4 @@
 from django import template
-
-from django import template
 from django.template.defaultfilters import stringfilter
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Count
@@ -24,11 +22,11 @@ def get_tags(model=None):
         tags = list(Tag.objects.all())
         for t in tags:
             t.num_items = t.taggit_taggeditem_items.filter(content_type__model=model).count()
-            if t.num_items == 0:
-                tags.remove(t)
-        return tags
+            if t.num_items != 0:
+                yield t
     else:
-        return Tag.objects.annotate(num_items=Count('taggit_taggeditem_items__content_type__model'))
+        for x in Tag.objects.annotate(num_items=Count('taggit_taggeditem_items__content_type__model')):
+            yield x
 
 
 @register.filter
