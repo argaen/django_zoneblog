@@ -24,7 +24,7 @@ class Content(models.Model):
 
     views = models.IntegerField(_("Views"), editable=False, default=0)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
     def get_classname(self):
