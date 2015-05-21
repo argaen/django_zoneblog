@@ -19,7 +19,7 @@ class Content(models.Model):
     published_on = models.DateField(_("Published on"), default=datetime.date.today)
     is_published = models.BooleanField(_("Is published"), default=False)
 
-    keywords = models.CharField(_("Meta keywords"), max_length=1000, help_text="A comma-separated list of keywords")
+    keywords = models.CharField(_("Meta keywords"), max_length=1000, help_text="A comma-separated list of keywords. Used for Google indexing.", blank=True, null=True)
     tags = TaggableManager(blank=True)
 
     views = models.IntegerField(_("Views"), editable=False, default=0)
