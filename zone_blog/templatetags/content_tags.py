@@ -35,13 +35,11 @@ def markdownify(text):
 
 
 @register.assignment_tag
-def get_latest_posts():
-    return Post.objects.filter(is_published=True)[:3]
-
-
-@register.assignment_tag
-def get_latest_projects():
-    return Project.objects.filter(is_published=True)[:3]
+def get_posts(n=None):
+    if n:
+        return Post.objects.filter(is_published=True)[:n]
+    else:
+        return Post.objects.filter(is_published=True)
 
 
 @register.filter    # Register the function as a filter

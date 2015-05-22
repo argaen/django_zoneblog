@@ -13,10 +13,14 @@ class PostListView(ArchiveIndexView):
     date_field = 'published_on'
 
     def get_queryset(self):
+        queryset = super(PostListView, self).get_queryset()
         if "tag" in self.kwargs:
-            return super(PostListView, self).get_queryset().filter(tags__name__in=[self.kwargs["tag"]])
-        else:
-            return super(PostListView, self).get_queryset()
+            queryset = queryset.filter(tags__name__in=[self.kwargs["tag"]])
+
+        if "year" in self.kwargs and "month" in self.kwargs:
+            queryset = queryset.filter(published_on__year=self.kwargs["year"], published_on__month=self.kwargs["month"])
+
+        return queryset
 
 
 class PostDetailView(DetailView):

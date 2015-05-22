@@ -114,8 +114,8 @@
 
           <div class="blog-post">
             <h3>Latest Publications</h3>
-            {% get_latest_posts as posts %}
-            {% for p in posts %}
+            {% get_posts as posts %}
+            {% for p in posts|slice:":3" %}
               <div class="media">
                 {% if p.photo %}
                   <a class="pull-left" href="{% url 'post-detail' p.slug %}">
@@ -132,14 +132,23 @@
             {% endfor %}
           </div>
 
+          <div class="archive">
+            <h3>
+              Archive
+            </h3>
+            <ul class="list-unstyled">
+              {% regroup posts by published_on|date:"F Y" as date_list %}
+              {% for d in date_list %}
+                <li>
+                  <a href="{% url 'post-list-archive' d.list.0.published_on|date:"Y" d.list.0.published_on|date:"m" %}">
+                    <i class="fa fa-angle-double-right pr-10"></i>
+                    {{ d.grouper }} ({{d.list|length}})
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
 
-          <!-- <div class="archive"> -->
-          <!--   <h3>Archive</h3> -->
-          <!--   <ul class="list-unstyled"> -->
-          <!--     <li><a href="javascript:;"><i class="fa fa-angle-double-right pr-10"></i>May 2014</a></li> -->
-          <!--     <li><a href="javascript:;"><i class="fa fa-angle-double-right pr-10"></i>April 2014</a></li> -->
-          <!--   </ul> -->
-          <!-- </div> -->
 
         </div>
       </div>

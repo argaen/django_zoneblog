@@ -3,4 +3,15 @@
 
 ### Description
 
-Open source blog from scratch written in Django. [django.zone](http://django.zone) is running with this app.
+Personal open source blog from scratch written in Django. [django.zone](http://django.zone) is running with this app.
+
+
+### TODO
+
+- RSS
+- Archive
+- Projects
+- Flatpages
+- Search
+- Twitter feed
+
