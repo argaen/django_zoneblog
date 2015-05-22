@@ -7,6 +7,7 @@ urlpatterns = patterns(
     '',
     url(r'^posts$', views.PostListView.as_view(), name='post-list'),
     url(r'^posts/tag/(?P<tag>[\ \w-]+)/$', views.PostListView.as_view(), name='post-list-tag'),
+    url(r'^posts/archive/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$', views.PostListView.as_view(), name='post-list-archive'),
     url(r'^posts/(?P<slug>[\w-]+)/$', views.PostDetailView.as_view(), name='post-detail'),
 
     # url(r'^projects$', views.ProjectListView.as_view(), name='project-list'),
