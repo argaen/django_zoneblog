@@ -58,7 +58,7 @@
               </div>
 
               <div class="col-lg-2 col-sm-2 text-right">
-                <div class="author"> By {{o.author}} </div>
+                <div class="author"> By <a>{{o.author}}</a> </div>
                 <ul class="list-unstyled">
                   {% for t in o.tags.all %}
                     <li><a href="{% url 'post-list-tag' t.name %}"><em> {{t}} </em></a></li>
