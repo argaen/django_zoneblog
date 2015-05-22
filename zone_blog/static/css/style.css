@@ -3022,3 +3022,7 @@ span.at4-icon.aticon-linkedin {
 .addthis_sharing_toolbox a.at-svc-twitter, .addthis_sharing_toolbox a.at-svc-linkedin, .addthis_sharing_toolbox a.at-svc-google_plusone_share {
   background-color: #fff;
 }
+
+code {
+  white-space: pre-wrap;
+}

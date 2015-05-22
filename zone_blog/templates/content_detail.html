@@ -28,46 +28,52 @@
   <div class="col-lg-9">
     <div class="blog-item">
       <div class="row">
+        <div class="col-md-12">
+          <div class="row">
 
-        <div class="col-lg-2 col-sm-2">
-          <div class="date-wrap">
-            <span class="date"> {{o.published_on|date:"d"}} </span>
-            <span class="month"> {{o.published_on|date:"M"}} {{o.published_on|date:"Y"}}</span>
+            <div class="col-lg-2 col-sm-2">
+              <div class="date-wrap">
+                <span class="date"> {{o.published_on|date:"d"}} </span>
+                <span class="month"> {{o.published_on|date:"M"}} {{o.published_on|date:"Y"}}</span>
+              </div>
+              <div style="text-align:center;" class="addthis_sharing_toolbox" data-title="{{o.title}}"></div>
+            </div>
+
+            <div class="col-lg-10 col-sm-10">
+              {% if o.photo %}
+                <div class="blog-img">
+                  <img src="{{o.photo.url}}" alt=""/>
+                </div>
+              {% endif %}
+            </div>
           </div>
-          <div style="text-align:center;" class="addthis_sharing_toolbox" data-title="{{o.title}}"></div>
-        </div>
 
-        {% if o.photo %}
-        <div class="col-lg-10 col-sm-10">
-          <div class="blog-img">
-            <img src="{{o.photo.url}}" alt=""/>
+          <div class="row">
+            <div class="col-lg-2 col-sm-2 text-right">
+              <div class="author"> By {{o.author}} </div>
+              <ul class="list-unstyled">
+                {% for t in o.tags.all %}
+                  <li><a href="{% url 'post-list-tag' t.name %}"><em> {{t}} </em></a></li>
+                {% endfor %}
+              </ul>
+              <div class="st-view">
+                <ul class="list-unstyled">
+                  {#<li><a style="cursor:default;"> {{o.views}} Views </a></li>#}
+                  <li><a style="cursor:default;"><span style="color: #48cfad;font-weight:normal;" id="atcounter">0</span> Shares </a></li>
+                  <li><a data-disqus-identifier="{{o.slug}}" style="cursor:default;"> 0 Comments</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-lg-10 col-sm-12">
+              <h1><a>{{o.title}}</a></h1>
+              <p>{{o.content|markdownify|highlight_code|safe}}</p>
+
+              <div id="disqus_thread" style="margin-top:20px;"></div>
+            </div>
           </div>
         </div>
-        {% endif %}
 
-
-        <div class="col-lg-10 col-sm-10 pull-right">
-          <h1><a>{{o.title}}</a></h1>
-          <p>{{o.content|markdownify|highlight_code|safe}}</p>
-
-          <div id="disqus_thread" style="margin-top:20px;"></div>
-        </div>
-
-        <div class="col-lg-2 col-sm-2 text-right">
-          <div class="author"> By {{o.author}} </div>
-          <ul class="list-unstyled">
-            {% for t in o.tags.all %}
-              <li><a href="{% url 'post-list-tag' t.name %}"><em> {{t}} </em></a></li>
-            {% endfor %}
-          </ul>
-          <div class="st-view">
-            <ul class="list-unstyled">
-              {#<li><a style="cursor:default;"> {{o.views}} Views </a></li>#}
-              <li><a style="cursor:default;"><span style="color: #48cfad;font-weight:normal;" id="atcounter">0</span> Shares </a></li>
-              <li><a data-disqus-identifier="{{o.slug}}" style="cursor:default;"> 0 Comments</a></li>
-            </ul>
-          </div>
-        </div>
       </div>
     </div>
   </div>

@@ -30,51 +30,58 @@
         {% for o in objects %}
           <div class="blog-item">
             <div class="row">
+              <div class="col-md-12">
 
-              <div class="col-lg-2 col-sm-2">
-                <div class="date-wrap">
-                  <span class="date"> {{o.published_on|date:"d"}} </span>
-                  <span class="month"> {{o.published_on|date:"M"}} {{o.published_on|date:"Y"}}</span>
-                </div>
-                <div style="text-align:center;" class="addthis_sharing_toolbox" data-title="{{o.title}}" data-url="http://django.zone{% url 'post-detail' o.slug %}"></div>
-              </div>
+                <div class="row">
+                  <div class="col-lg-2 col-sm-2">
+                    <div class="date-wrap">
+                      <span class="date"> {{o.published_on|date:"d"}} </span>
+                      <span class="month"> {{o.published_on|date:"M"}} {{o.published_on|date:"Y"}}</span>
+                    </div>
+                    <div style="text-align:center;" class="addthis_sharing_toolbox" data-title="{{o.title}}" data-url="http://django.zone{% url 'post-detail' o.slug %}"></div>
+                  </div>
 
-              {% if o.photo %}
-                <div class="col-lg-10 col-sm-10">
-                  <div class="blog-img">
-                    <img src="{{o.photo.url}}" alt=""/>
+                  <div class="col-lg-10 col-sm-10">
+                    {% if o.photo %}
+                      <div class="blog-img">
+                        <img src="{{o.photo.url}}" alt=""/>
+                      </div>
+                    {% endif %}
                   </div>
                 </div>
-              {% endif %}
 
-              <div class="col-lg-10 col-sm-10 pull-right">
-                <h1><a href="{% url 'post-detail' o.slug %}">{{o.title}}</a></h1>
-                {% if o.photo %}
-                  <p>{{o.content|markdownify|highlight_code|safe|truncatechars_html:350}}</p>
-                {% else %}
-                  <p>{{o.content|markdownify|highlight_code|safe|truncatechars_html:750}}</p>
-                {% endif %}
-                <a href="{% url 'post-detail' o.slug %}" class="btn btn-primary"> Continue Reading </a>
-              </div>
+                <div class="row">
+                  <div class="col-lg-2 col-sm-2 text-right">
+                    <div class="author"> By {{o.author}} </div>
+                    <ul class="list-unstyled">
+                      {% for t in o.tags.all %}
+                        <li><a href="{% url 'post-list-tag' t.name %}"><em> {{t}} </em></a></li>
+                      {% endfor %}
+                    </ul>
+                    <div class="st-view">
+                      <ul class="list-unstyled">
+                        {#<li><a style="cursor:default;"> {{o.views}} Views </a></li>#}
+                        <li><a style="cursor:default;"><span style="color: #48cfad;font-weight:normal;" id="{{o.slug}}">0</span> Shares </a></li>
+                        <li><a data-disqus-identifier="{{o.slug}}" style="cursor:default;">0 Comments</a></li>
+                      </ul>
+                    </div>
+                  </div>
 
-              <div class="col-lg-2 col-sm-2 text-right">
-                <div class="author"> By {{o.author}} </div>
-                <ul class="list-unstyled">
-                  {% for t in o.tags.all %}
-                    <li><a href="{% url 'post-list-tag' t.name %}"><em> {{t}} </em></a></li>
-                  {% endfor %}
-                </ul>
-                <div class="st-view">
-                  <ul class="list-unstyled">
-                    {#<li><a style="cursor:default;"> {{o.views}} Views </a></li>#}
-                    <li><a style="cursor:default;"><span style="color: #48cfad;font-weight:normal;" id="{{o.slug}}">0</span> Shares </a></li>
-                    <li><a data-disqus-identifier="{{o.slug}}" style="cursor:default;">0 Comments</a></li>
-                  </ul>
+                  <div class="col-lg-10 col-sm-12">
+                    <h1><a href="{% url 'post-detail' o.slug %}">{{o.title}}</a></h1>
+                    {% if o.photo %}
+                      <p>{{o.content|markdownify|highlight_code|safe|truncatechars_html:350}}</p>
+                    {% else %}
+                      <p>{{o.content|markdownify|highlight_code|safe|truncatechars_html:750}}</p>
+                    {% endif %}
+                    <a href="{% url 'post-detail' o.slug %}" class="btn btn-primary"> Continue Reading </a>
+                  </div>
                 </div>
               </div>
 
             </div>
           </div>
+
           <script type="text/javascript">
             $(function(){
               addthis.sharecounters.getShareCounts({service: ['linkedin', 'twitter'], countUrl: "http://django.zone{% url 'post-detail' o.slug %}"}, function(obj) {
