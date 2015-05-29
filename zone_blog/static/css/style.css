@@ -3026,3 +3026,9 @@ span.at4-icon.aticon-linkedin {
 code {
   white-space: pre-wrap;
 }
+
+@media screen and (min-width: 768px) {
+  .metadata {
+    text-align: right;
+  }
+}

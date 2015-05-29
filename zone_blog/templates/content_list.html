@@ -38,7 +38,6 @@
                       <span class="date"> {{o.published_on|date:"d"}} </span>
                       <span class="month"> {{o.published_on|date:"M"}} {{o.published_on|date:"Y"}}</span>
                     </div>
-                    <div style="text-align:center;" class="addthis_sharing_toolbox" data-title="{{o.title}}" data-url="http://django.zone{% url 'post-detail' o.slug %}"></div>
                   </div>
 
                   <div class="col-lg-10 col-sm-10">
@@ -51,7 +50,7 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-lg-2 col-sm-2 text-right">
+                  <div class="col-lg-2 col-sm-2 metadata">
                     <div class="author"> By {{o.author}} </div>
                     <ul class="list-unstyled">
                       {% for t in o.tags.all %}
@@ -63,6 +62,7 @@
                         {#<li><a style="cursor:default;"> {{o.views}} Views </a></li>#}
                         <li><a style="cursor:default;"><span style="color: #48cfad;font-weight:normal;" id="{{o.slug}}">0</span> Shares </a></li>
                         <li><a data-disqus-identifier="{{o.slug}}" style="cursor:default;">0 Comments</a></li>
+                        <li class="addthis_sharing_toolbox" data-title="{{o.title}}" data-url="http://django.zone{% url 'post-detail' o.slug %}"></li>
                       </ul>
                     </div>
                   </div>
