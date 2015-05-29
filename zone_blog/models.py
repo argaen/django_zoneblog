@@ -17,6 +17,7 @@ class Content(models.Model):
     photo = VersatileImageField(_("Picture"), upload_to="img/posts/", blank=True, null=True)
 
     published_on = models.DateField(_("Published on"), default=datetime.date.today)
+    last_update = models.DateField(_("Last update"), blank=True, null=True)
     is_published = models.BooleanField(_("Is published"), default=False)
 
     keywords = models.CharField(_("Meta keywords"), max_length=1000, help_text="A comma-separated list of keywords. Used for Google indexing.", blank=True, null=True)
@@ -40,4 +41,4 @@ class Post(Content):
 
 
 class Project(Content):
-    template = models.CharField(_("Template"), max_length=200, blank=True, null=True)
+    project_url = models.URLField(_("Project url"))

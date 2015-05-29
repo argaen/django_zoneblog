@@ -10,13 +10,10 @@ urlpatterns = patterns(
     url(r'^posts/archive/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$', views.PostListView.as_view(), name='post-list-archive'),
     url(r'^posts/(?P<slug>[\w-]+)/$', views.PostDetailView.as_view(), name='post-detail'),
 
-    # url(r'^projects$', views.ProjectListView.as_view(), name='project-list'),
-    # url(r'^projects/(?P<slug>[\w-]+)/$', views.ProjectDetailView.as_view(), name='project-detail'),
+    url(r'^projects$', views.ProjectListView.as_view(), name='project-list'),
+    url(r'^projects/tag/(?P<tag>[\ \w-]+)/$', views.ProjectListView.as_view(), name='project-list-tag'),
+    url(r'^projects/archive/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$', views.ProjectListView.as_view(), name='project-list-archive'),
+    url(r'^projects/(?P<slug>[\w-]+)/$', views.ProjectDetailView.as_view(), name='project-detail'),
 
     # url(r'^about/$', 'views.about', name='about'),
-)
-
-urlpatterns = urlpatterns + patterns('django.views.generic.simple',
-    # (r'^projects/catalonia-9n-results/$', TemplateView.as_view(template_name='projects/9n/9n.html')),
-    (r'^projects/9n/stats.html$', TemplateView.as_view(template_name='projects/9n/stats.html')),
 )

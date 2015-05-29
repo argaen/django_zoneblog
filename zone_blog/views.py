@@ -31,17 +31,16 @@ class PostDetailView(DetailView):
     queryset = Post.objects.filter(is_published=True)
 
 
-# class ProjectListView(ArchiveIndexView):
-#     context_object_name = 'objects'
-#     template_name = 'content_list.html'
-#     queryset = Project.objects.filter(is_published=True)
-#     paginate_by = 4
-#     date_field = 'published_on'
+class ProjectListView(ArchiveIndexView):
+    context_object_name = 'objects'
+    template_name = 'project_list.html'
+    queryset = Project.objects.filter(is_published=True)
+    date_field = 'published_on'
 
 
-# class ProjectDetailView(DetailView):
+class ProjectDetailView(DetailView):
 
-#     context_object_name = 'o'
-#     slug_field = 'slug'
-#     template_name = 'content_detail.html'
-#     queryset = Project.objects.filter(is_published=True)
+    context_object_name = 'o'
+    slug_field = 'slug'
+    template_name = 'project_detail.html'
+    queryset = Project.objects.filter(is_published=True)

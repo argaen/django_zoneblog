@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% load content_tags %}
+{% load staticfiles %}
+
+{% block content %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-sm-4">
+        <h1>Projects</h1>
+      </div>
+      <div class="col-lg-8 col-sm-8">
+        <ol class="breadcrumb pull-right">
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li class="active">Projects</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block projects_content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <ul id="filters" class="clearfix">
+          <li><span class="filter active" data-filter="app card icon logo web">All</span></li>
+          <li><span class="filter" data-filter="app">App</span></li>
+          <li><span class="filter" data-filter="card">Card</span></li>
+          <li><span class="filter" data-filter="icon">Icon</span></li>
+          <li><span class="filter" data-filter="logo">Logo</span></li>
+          <li><span class="filter" data-filter="web">Web</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row  mar-b-30">
+      <div id="portfoliolist">
+        <div class="col-md-12">
+
+          {% for o in objects %}
+            <div class="portfolio icon card" data-cat="icon">
+              <div class="portfolio-wrapper">
+                <div class="portfolio-hover">
+                  <div class="image-caption">
+                    <a href="{{ o.photo.url }}" class="label magnefig label-info icon" data-toggle="tooltip" data-placement="left" title="Zoom"><i class="fa fa-eye"></i></a>
+                    <a href="{% url 'project-detail' o.slug %}" class="label label-info icon" data-toggle="tooltip" data-placement="top" title="Details"><i class="fa fa-link"></i></a>
+                    <a href="#" class="label label-info icon" data-toggle="tooltip" data-placement="right" title="Likes"><i class="fa fa-heart"></i></a>
+
+                  </div>
+                  <img src="{{ o.photo.url }}" alt="" />
+                </div>
+              </div>
+              <h4 style="text-align:center;"><a href="{% url 'project-detail' o.slug %}">{{o.title}}</a></h4>
+            </div>
+          {% endfor %}
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    $(function () {
+      $('.image-caption a').tooltip();
+
+      var filterList = {
+
+        init: function () {
+
+          // MixItUp plugin
+          // http://mixitup.io
+          $('#portfoliolist').mixitup({
+            targetSelector: '.portfolio',
+            filterSelector: '.filter',
+            effects: ['fade'],
+            easing: 'snap',
+              // call the hover effect
+            onMixEnd: filterList.hoverEffect()
+          });
+
+        },
+
+        hoverEffect: function () {
+          $("[rel='tooltip']").tooltip();
+          // Simple parallax effect
+          $('#portfoliolist .portfolio .portfolio-hover').hover(
+              function(){
+                $(this).find('.image-caption').slideDown(250); //.fadeIn(250)
+              },
+              function(){
+                $(this).find('.image-caption').slideUp(250); //.fadeOut(205)
+              }
+              );
+        }
+      };
+      // Run the show!
+      filterList.init();
+    });
+
+    $( document ).ready(function() {
+
+      $('.magnefig').each(function(){
+        $(this).magnificPopup({
+          type:'image',
+          removalDelay: 300,
+          mainClass: 'mfp-fade'
+        })
+      });
+    });
+  </script>
+{% endblock projects_content %}
+
+{% endblock content %}
