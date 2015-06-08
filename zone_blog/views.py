@@ -1,6 +1,7 @@
 from django.views.generic import DetailView
 from django.views.generic.dates import ArchiveIndexView
 
+from taggit.models import Tag
 
 from models import Post, Project
 
@@ -37,6 +38,11 @@ class ProjectListView(ArchiveIndexView):
     queryset = Project.objects.filter(is_published=True)
     date_field = 'published_on'
 
+    def get_context_data(self, **kwargs):
+        context = super(ProjectListView, self).get_context_data(**kwargs)
+        context['categories'] = Tag.objects.filter(project__is_published=True)
+        return context
+
 
 class ProjectDetailView(DetailView):
 
@@ -44,3 +50,8 @@ class ProjectDetailView(DetailView):
     slug_field = 'slug'
     template_name = 'project_detail.html'
     queryset = Project.objects.filter(is_published=True)
+
+    def get_context_data(self, **kwargs):
+        context = super(ProjectDetailView, self).get_context_data(**kwargs)
+        context['objects'] = Project.objects.filter(is_published=True).exclude(pk=self.get_object().pk)
+        return context

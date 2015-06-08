@@ -15,7 +15,6 @@
         </div>
         <div class="col-lg-8 col-sm-8">
           <ol class="breadcrumb pull-right">
-            <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="{% url 'project-list' %}">Projects</a></li>
             <li class="active">{{o.title}}</li>
           </ol>
@@ -49,9 +48,9 @@
           <hr>
         </div>
         <div class="pf-detail">
-          {{o.content}}
+          {{o.content|markdownify|highlight_code|safe}}
         </div>
-        <p><button class="btn bg-maroon margin"><i class="fa fa-external-link pr-5"></i>Preview</button></p>
+        <a target=_blank href="{{o.project_url}}" class="btn btn-primary"> View project </a>
       </div>
 
       <div class="col-lg-3">
@@ -72,78 +71,42 @@
           {% if o.last_update %}
           <li><i class="fa fa-arrow-circle-right pr-10"></i><b>Last Update: </b><span>{{o.last_update|date:"d F, Y"}}</span></li>
           {% endif %}
-          <li><i class="fa fa-arrow-circle-right pr-10"></i><b>Project Site: </b><span><a target=_blank href="{{o.url}}">{{o.title}}</a></span></li>
+          <li><i class="fa fa-arrow-circle-right pr-10"></i><b>Project Site: </b><span><a target=_blank href="{{o.project_url}}">{{o.title}}</a></span></li>
+          {% if o.code_url %}
+            <li><i class="fa fa-arrow-circle-right pr-10"></i><b>Source Code: </b><span><a target=_blank href="{{o.code_url}}">{{o.title}}</a></span></li>
+          {% endif %}
         </ul>
       </div>
     </div>
-    <ul class="pager">
-      <li class="previous"><a href="#">&larr; Older</a></li>
-      <li class="next"><a href="#">Newer &rarr;</a></li>
-    </ul>
     <hr>
   </div>
 
-  <div class="container">
-    <!--recent work start-->
-    <div class="row">
-      <div class="col-lg-12 recent">
-        <h3>Related Work</h3>
-        <p>Some of our work we have done earlier</p>
-        <div id="owl-demo" class="owl-carousel owl-theme wow fadeIn">
+  {% if objects.all %}
+    <div class="container">
+      <!--recent work start-->
+      <div class="row">
+        <div class="col-lg-12 recent">
+          <h3>Other projects</h3>
+          <p>Some of work I've done</p>
+          <div id="owl-demo" class="owl-carousel owl-theme wow fadeIn">
 
-          <div class="item view view-tenth">
-            <img src="img/works/img8.jpg" alt="work Image">
-            <div class="mask">
-              <a href="portfolio-single-image.html" class="info" data-toggle="tooltip" data-placement="top" title="Details">
-                <i class="fa fa-link"></i>
-              </a>
-            </div>
-          </div>
-          <div class="item view view-tenth">
-            <img src="img/works/img9.jpg" alt="work Image">
-            <div class="mask">
-              <a href="portfolio-single-image.html" class="info" data-toggle="tooltip" data-placement="top" title="Details">
-                <i class="fa fa-link"></i>
-              </a>
-            </div>
-          </div>
-          <div class="item view view-tenth">
-            <img src="img/works/img10.jpg" alt="work Image">
-            <div class="mask">
-              <a href="portfolio-single-image.html" class="info" data-toggle="tooltip" data-placement="top" title="Details">
-                <i class="fa fa-link"></i>
-              </a>
-            </div>
-          </div>
-          <div class="item view view-tenth">
-            <img src="img/works/img11.jpg" alt="work Image">
-            <div class="mask">
-              <a href="portfolio-single-image.html" class="info" data-toggle="tooltip" data-placement="top" title="Details">
-                <i class="fa fa-link"></i>
-              </a>
-            </div>
-          </div>
-          <div class="item view view-tenth">
-            <img src="img/works/img12.jpg" alt="work Image">
-            <div class="mask">
-              <a href="blog_detail.html" class="info" data-toggle="tooltip" data-placement="top" title="Details">
-                <i class="fa fa-link"></i>
-              </a>
-            </div>
-          </div>
-          <div class="item view view-tenth">
-            <img src="img/works/img13.jpg" alt="work Image">
-            <div class="mask">
-              <a href="blog_detail.html" class="info" data-toggle="tooltip" data-placement="top" title="Details">
-                <i class="fa fa-link"></i>
-              </a>
-            </div>
+            {% for o in objects %}
+              <div class="item view view-tenth">
+                <img src="{{ o.photo.url }}" alt="work Image">
+                <div class="mask">
+                  <a href="{% url 'project-detail' o.slug %}" class="info" data-toggle="tooltip" data-placement="top" title="Details">
+                    <i class="fa fa-link"></i>
+                  </a>
+                </div>
+              </div>
+            {% endfor %}
+
           </div>
         </div>
       </div>
+      <!--recent work end-->
     </div>
-    <!--recent work end-->
-  </div>
+  {% endif %}
 
 {% endblock projects_content %}
 {% endblock content %}

@@ -19,7 +19,7 @@ register = template.Library()
 @register.assignment_tag
 def get_tags(model=None):
     if model:
-        tags = list(Tag.objects.all())
+        tags = list(Tag.objects.filter(post__is_published=True).distinct())
         for t in tags:
             t.num_items = t.taggit_taggeditem_items.filter(content_type__model=model).count()
             if t.num_items != 0:
