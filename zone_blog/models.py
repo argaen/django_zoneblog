@@ -42,3 +42,4 @@ class Post(Content):
 
 class Project(Content):
     project_url = models.URLField(_("Project url"))
+    code_url = models.URLField(_("Code url"), null=True, blank=True)

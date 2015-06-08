@@ -14,7 +14,6 @@
       </div>
       <div class="col-lg-8 col-sm-8">
         <ol class="breadcrumb pull-right">
-          <li><a href="{% url 'home' %}">Home</a></li>
           <li class="active">Projects</li>
         </ol>
       </div>
@@ -28,12 +27,10 @@
     <div class="row">
       <div class="col-md-6">
         <ul id="filters" class="clearfix">
-          <li><span class="filter active" data-filter="app card icon logo web">All</span></li>
-          <li><span class="filter" data-filter="app">App</span></li>
-          <li><span class="filter" data-filter="card">Card</span></li>
-          <li><span class="filter" data-filter="icon">Icon</span></li>
-          <li><span class="filter" data-filter="logo">Logo</span></li>
-          <li><span class="filter" data-filter="web">Web</span></li>
+          <li><span class="filter active" data-filter="{% for c in categories %}{{c}}{% if not forloop.last%} {%endif%}{% endfor %}">All</span></li>
+          {% for c in categories %}
+            <li><span class="filter" data-filter="{{c}}">{{c}}</span></li>
+          {% endfor %}
         </ul>
       </div>
     </div>
@@ -44,13 +41,15 @@
         <div class="col-md-12">
 
           {% for o in objects %}
-            <div class="portfolio icon card" data-cat="icon">
+            <div class="portfolio {% for t in o.tags.all %}{{t}} {% endfor %}" data-cat="icon">
               <div class="portfolio-wrapper">
                 <div class="portfolio-hover">
                   <div class="image-caption">
                     <a href="{{ o.photo.url }}" class="label magnefig label-info icon" data-toggle="tooltip" data-placement="left" title="Zoom"><i class="fa fa-eye"></i></a>
                     <a href="{% url 'project-detail' o.slug %}" class="label label-info icon" data-toggle="tooltip" data-placement="top" title="Details"><i class="fa fa-link"></i></a>
-                    <a href="#" class="label label-info icon" data-toggle="tooltip" data-placement="right" title="Likes"><i class="fa fa-heart"></i></a>
+                    {% if o.code_url %}
+                      <a href="{{ o.code_url}}" target=_blank class="label label-info icon" data-toggle="tooltip" data-placement="right" title="Code"><i class="fa fa-github"></i></a>
+                    {% endif %}
 
                   </div>
                   <img src="{{ o.photo.url }}" alt="" />
