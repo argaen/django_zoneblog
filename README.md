@@ -9,9 +9,6 @@ Personal open source blog from scratch written in Django. [django.zone](http://d
 ### TODO
 
 - RSS
-- Archive
-- Projects
 - Flatpages
 - Search
 - Twitter feed
-

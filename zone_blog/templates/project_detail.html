@@ -48,9 +48,9 @@
           <hr>
         </div>
         <div class="pf-detail">
-          {{o.content}}
+          {{o.content|markdownify|highlight_code|safe}}
         </div>
-        <p><button class="btn bg-maroon margin"><i class="fa fa-external-link pr-5"></i>Preview</button></p>
+        <a target=_blank href="{{o.project_url}}" class="btn btn-primary"> View project </a>
       </div>
 
       <div class="col-lg-3">
@@ -71,7 +71,7 @@
           {% if o.last_update %}
           <li><i class="fa fa-arrow-circle-right pr-10"></i><b>Last Update: </b><span>{{o.last_update|date:"d F, Y"}}</span></li>
           {% endif %}
-          <li><i class="fa fa-arrow-circle-right pr-10"></i><b>Project Site: </b><span><a target=_blank href="{{o.url}}">{{o.title}}</a></span></li>
+          <li><i class="fa fa-arrow-circle-right pr-10"></i><b>Project Site: </b><span><a target=_blank href="{{o.project_url}}">{{o.title}}</a></span></li>
           {% if o.code_url %}
             <li><i class="fa fa-arrow-circle-right pr-10"></i><b>Source Code: </b><span><a target=_blank href="{{o.code_url}}">{{o.title}}</a></span></li>
           {% endif %}
@@ -81,7 +81,7 @@
     <hr>
   </div>
 
-  {% if objects %}
+  {% if objects.all %}
     <div class="container">
       <!--recent work start-->
       <div class="row">

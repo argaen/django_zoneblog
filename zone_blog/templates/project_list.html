@@ -45,14 +45,16 @@
               <div class="portfolio-wrapper">
                 <div class="portfolio-hover">
                   <div class="image-caption">
-                    <a href="{{ o.photo.url }}" class="label magnefig label-info icon" data-toggle="tooltip" data-placement="left" title="Zoom"><i class="fa fa-eye"></i></a>
+                    {% if o.photo %}
+                      <a href="{{ o.photo.url }}" class="label magnefig label-info icon" data-toggle="tooltip" data-placement="left" title="Zoom"><i class="fa fa-eye"></i></a>
+                    {% endif %}
                     <a href="{% url 'project-detail' o.slug %}" class="label label-info icon" data-toggle="tooltip" data-placement="top" title="Details"><i class="fa fa-link"></i></a>
                     {% if o.code_url %}
                       <a href="{{ o.code_url}}" target=_blank class="label label-info icon" data-toggle="tooltip" data-placement="right" title="Code"><i class="fa fa-github"></i></a>
                     {% endif %}
 
                   </div>
-                  <img src="{{ o.photo.url }}" alt="" />
+                  <img src="{% if o.photo %}{{ o.photo.url }}{% else %}{% static 'img/project_default.gif' %}{% endif %}" alt="" />
                 </div>
               </div>
               <h4 style="text-align:center;"><a href="{% url 'project-detail' o.slug %}">{{o.title}}</a></h4>
