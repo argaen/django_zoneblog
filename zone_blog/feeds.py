@@ -10,15 +10,13 @@ from models import Post
 class LatestPosts(Feed):
     title = "Django Zone latests posts"
     link = "/"
+    description_template = 'content_description.html'
 
     def items(self):
-        return Post.objects.all()
+        return Post.objects.filter(is_published=True)
 
     def item_title(self, item):
         return item.title
-
-    def item_description(self, item):
-        return item.content
 
     # If models don't have get_absolute_url method, override item_link
     # def item_link(self, item):
@@ -26,6 +24,7 @@ class LatestPosts(Feed):
 
 
 class Category(Feed):
+    description_template = 'content_description.html'
 
     def get_object(self, request, tag):
         return get_object_or_404(Tag, name=tag)
@@ -38,9 +37,6 @@ class Category(Feed):
 
     def item_title(self, item):
         return item.title
-
-    def item_description(self, item):
-        return item.content
 
     def items(self, obj):
         return Post.objects.filter(is_published=True, tags__name=obj)
