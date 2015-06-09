@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from django.core.urlresolvers import reverse
 
 
 import datetime
@@ -37,9 +38,13 @@ class Content(models.Model):
 
 
 class Post(Content):
-    pass
+    def get_absolute_url(self):
+        return reverse('post-detail', args=[self.slug])
 
 
 class Project(Content):
     project_url = models.URLField(_("Project url"))
     code_url = models.URLField(_("Code url"), null=True, blank=True)
+
+    def get_absolute_url(self):
+        return reverse('project-detail', args=[self.slug])

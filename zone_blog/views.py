@@ -4,38 +4,29 @@ from django.views.generic.dates import ArchiveIndexView
 from taggit.models import Tag
 
 from models import Post, Project
+from mixins import TaggedObjectMixinView, DateObjectMixinView, DraftObjectMixinView
 
 
-class PostListView(ArchiveIndexView):
+class PostListView(TaggedObjectMixinView, DateObjectMixinView, DraftObjectMixinView, ArchiveIndexView):
     context_object_name = 'objects'
     template_name = 'post_list.html'
-    queryset = Post.objects.filter(is_published=True)
+    queryset = Post.objects.all()
     paginate_by = 4
     date_field = 'published_on'
 
-    def get_queryset(self):
-        queryset = super(PostListView, self).get_queryset()
-        if "tag" in self.kwargs:
-            queryset = queryset.filter(tags__name__in=[self.kwargs["tag"]])
 
-        if "year" in self.kwargs and "month" in self.kwargs:
-            queryset = queryset.filter(published_on__year=self.kwargs["year"], published_on__month=self.kwargs["month"])
-
-        return queryset
-
-
-class PostDetailView(DetailView):
+class PostDetailView(TaggedObjectMixinView, DateObjectMixinView, DraftObjectMixinView, DetailView):
 
     context_object_name = 'o'
     slug_field = 'slug'
     template_name = 'post_detail.html'
-    queryset = Post.objects.filter(is_published=True)
+    queryset = Post.objects.all()
 
 
-class ProjectListView(ArchiveIndexView):
+class ProjectListView(TaggedObjectMixinView, DateObjectMixinView, DraftObjectMixinView, ArchiveIndexView):
     context_object_name = 'objects'
     template_name = 'project_list.html'
-    queryset = Project.objects.filter(is_published=True)
+    queryset = Project.objects.all()
     date_field = 'published_on'
 
     def get_context_data(self, **kwargs):
@@ -44,12 +35,12 @@ class ProjectListView(ArchiveIndexView):
         return context
 
 
-class ProjectDetailView(DetailView):
+class ProjectDetailView(TaggedObjectMixinView, DateObjectMixinView, DraftObjectMixinView, DetailView):
 
     context_object_name = 'o'
     slug_field = 'slug'
     template_name = 'project_detail.html'
-    queryset = Project.objects.filter(is_published=True)
+    queryset = Project.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super(ProjectDetailView, self).get_context_data(**kwargs)
