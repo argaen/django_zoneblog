@@ -2,6 +2,12 @@
 
 {% load content_tags %}
 
+{% block extrahead %}
+  {% if o.photo %}
+    <meta property="og:image" content="{{o.photo.url}}" />
+  {% endif %}
+{% endblock extrahead %}
+
 {% block title %}{{o.title}}{% endblock title %}
 
 {% block breadcrumbs %}

@@ -1,3 +1,5 @@
 {% load content_tags %}
 
-{{obj.content|markdownify|highlight_code|safe}}
+{{obj.content|markdownify|highlight_code|safe|truncatechars_html:350}}...
+<br><br>
+<a href="http://django.zone/{{obj.get_absolute_url}}">Read more</a>
